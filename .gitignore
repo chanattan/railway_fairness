@@ -1,0 +1,5 @@
+__pycache__/
+admin/
+cache/
+osmnx-env/
+*.gpickle
