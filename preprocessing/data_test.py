@@ -35,15 +35,13 @@ def load_cities_bis(csv_path):
         'code_insee': str,
         'nom_standard': str,
         'dep_code': str,
-        'population': float,
+        'population': int,
         'latitude_centre': float,
         'longitude_centre': float,
         'latitude_mairie': float,
         'longitude_mairie': float,
         'canton_code': str,
-        'epci_code': str,
-        'code_unite_urbaine': str,
-        'nom_unite_urbaine': str
+        'epci_code': str
     }
     df = pd.read_csv(csv_path, dtype=dtype)
 
@@ -58,7 +56,7 @@ def load_cities_bis(csv_path):
         print(f"[DEBUG] {df['latitude_centre'].isna().sum()} villes ont latitude_centre NaN, {df['longitude_centre'].isna().sum()} villes ont longitude_centre NaN")
 
     # Oublier les colonnes inutiles
-    df = df[[name_attr, 'code_unite_urbaine', 'nom_unite_urbaine', 'code_insee', 'population', 'latitude_centre', 'longitude_centre']]
+    df = df[[name_attr, 'code_insee', 'population', 'latitude_centre', 'longitude_centre']]
 
     # Création géométrie
     geometry = [Point(xy) for xy in zip(df['longitude_centre'], df['latitude_centre'])]
@@ -114,7 +112,7 @@ def associate_stations_to_cities(cities_gdf, stops_to_gares_df, gares_df):
     # À la place de l'association par département, pour les entrées manquantes dans les communes,
     # on regarde au niveau des arrondissements pour rattacher à la ville.
     # On le fait en amont.
-    df_communes = pd.read_csv("resources/v_commune_2025.csv")
+    df_communes = pd.read_csv("resources/france/v_commune_2025.csv")
     df_communes['COM'] = df_communes['COM'].apply(lambda x: str(int(x)) if isinstance(x, float) else str(x))
     df_communes['COMPARENT'] = df_communes['COMPARENT'].apply(lambda x: str(int(x)) if pd.notna(x) and isinstance(x, float) else str(x) if pd.notna(x) else None)
 
@@ -318,61 +316,159 @@ def match_stops_to_gares(stops, gares_df):
     print(f"[DEBUG] Dictionnaire stops -> gares : {list(dic.items())[:2]}")
     return dic, merged
 
-key = 'code_unite_urbaine'
-
-def aggregate_cities_to_agglomerations(cities_gdf):
+def load_aires():
     """
-    Agrège les villes dans leur unité urbaine associée, avec le code d'unité urbaine.
-    Retourne un dictionnaire {ville (code_insee): [nom, code_insee, code_unite_urbaine, nom_unite_urbaine, population, geometry]
+    Relatif à la France seulement : charger les aires d'attraction pour agréger les communes nécessaires.
+    """
+    aires = pd.read_csv("resources/france/aires_attraction_insee_2020.csv", comment='#', delimiter=';')
+    aires = aires[['CODGEO', 'AAV2020', 'LIBAAV2020', 'DEP', 'REG']].rename(
+        columns={
+            'CODGEO': 'code_insee',
+            'AAV2020': 'code_aire',
+            'LIBAAV2020': 'nom_aire'
+        }
+    )
+
+    print(aires['nom_aire'].head())
+    return aires
+
+def find_main_city_coords(group_data):
+    """
+    Fonction d'agrégation pour trouver les coordonnées de la ville principale
+    directement dans le groupby
+    """
+    nom_aire_lower = group_data['nom_aire'].iloc[0].lower()
+            
+    # Chercher la ville principale
+    for idx, row in group_data.iterrows():
+        nom_std = str(row['nom_standard']).lower()
+        if nom_std in nom_aire_lower:
+            lat = row['latitude'] if 'latitude' in row else row['latitude_centre']
+            lon = row['longitude'] if 'longitude' in row else row['longitude_centre']
+            if pd.notna(lat) and pd.notna(lon):
+                return pd.Series({
+                    'population': group_data['population'].sum(),
+                    'latitude_centre': lat,
+                    'longitude_centre': lon
+                })
+    
+    # Fallback: coordonnées moyennes
+    return pd.Series({
+        'population': group_data['population'].sum(),
+        'latitude_centre': group_data['latitude'].mean() if 'latitude' in group_data.columns else group_data['latitude_centre'].mean(),
+        'longitude_centre': group_data['longitude'].mean() if 'longitude' in group_data.columns else group_data['longitude_centre'].mean()
+    })
+def aggregate_cities_to_aires(cities_gdf):
+    """
+    Agrège les villes dans leur aire d'attraction, avec le code insee.
+    Retourne un dictionnaire {ville (code_insee): [nom, code_insee, code_aire, nom_aire, population, geometry]
     ainsi que les agrégations par unité urbaine.
     """
-    unites_urbaines = {}
-    agglomerations = {}
-    for _, row in cities_gdf.iterrows():
-        code_insee = row['code_insee']
-        code_urbain = row['code_unite_urbaine']
-        if unites_urbaines.get(code_urbain) is None:
-            unites_urbaines[code_urbain] = {'nom': row['nom_unite_urbaine'], 'population': row['population']}
-        else:
-            unites_urbaines[code_urbain]['population'] += row['population']
-        if agglomerations.get(code_insee) is None:
-            agglomerations[code_insee] = {
-                'code_unite_urbaine': row['code_unite_urbaine'],
-                'nom_unite_urbaine': row['nom_unite_urbaine'],
+    if country == 'france':
+        aires = load_aires()
+        
+        # Merger cities_gdf avec aires
+        # On garde toutes les communes de cities_gdf
+        cities_with_aires = pd.merge(cities_gdf, aires[['code_insee', 'code_aire', 'nom_aire']], 
+                                   on='code_insee', how='left')
+        
+        # Les fichiers des aires et des communes ne matchent pas exactement
+        # en raison des différentes dates de collection. On affecte aux communes qui n'ont pas d'aire (au sens pas d'entrée dans aires.csv) le code 000.
+        # (Toutes) Les communes ayant un code_aire de 000 n'ont pas d'aire d'attraction et on considère qu'elles sont à part entière.
+        # Il faut assigner un code_aire unique à chaque commune hors aire, afin de les différencier dans les noeuds et pouvoir utiliser leur propre nom de commune.
+        # /!\ Note importante : il peut y avoir des communes oubliées (notamment celles de petite taille).
+        max_code_aire = aires['code_aire'].astype(str).apply(lambda x: int(x) if x.isdigit() else 0).max()
+        print(f"Code aire maximum actuel: {max_code_aire}")
+        
+        # Et les communes sans aire trouvée et celles qui ne sont pas dans le fichier des aires
+        mask_missing = cities_with_aires['code_aire'].isna() | (cities_with_aires['code_aire'] == '000')
+        missing_count = mask_missing.sum()
+        print(f"Nombre de communes sans code_aire: {missing_count}")
+        
+        if missing_count > 0:
+            # Créer des nouveaux codes_aire uniques
+            new_codes = range(max_code_aire + 1, max_code_aire + 1 + missing_count)
+            new_codes_str = [str(code).zfill(3) for code in new_codes]
+            print("Nouveaux codes_aire assignés:", new_codes_str[:5], "..." if len(new_codes_str) > 5 else "")
+            
+            # Assigner les nouveaux codes
+            cities_with_aires.loc[mask_missing, 'code_aire'] = new_codes_str
+            # nom_aire = nom_standard pour ces communes
+            cities_with_aires.loc[mask_missing, 'nom_aire'] = cities_with_aires.loc[mask_missing, 'nom_standard']
+            
+            if 'latitude' in cities_with_aires.columns and 'longitude' in cities_with_aires.columns:
+                cities_with_aires.loc[mask_missing, 'latitude_centre'] = cities_with_aires.loc[mask_missing, 'latitude']
+                cities_with_aires.loc[mask_missing, 'longitude_centre'] = cities_with_aires.loc[mask_missing, 'longitude']
+        
+        # Grouper par by code_aire pour créer le dictionnaire associé
+        aires_grouped = cities_with_aires.groupby(['code_aire', 'nom_aire']).apply(find_main_city_coords).reset_index()
+
+        aires_grouped['population'] = aires_grouped['population'].astype(int)
+        
+        print(f"Aires grouped shape: {aires_grouped.shape}")
+        
+        # Premier dictionnaire mapping aires -> infos
+        aires_dict = {}
+        for _, row in aires_grouped.iterrows():
+            geometry = Point(row['longitude_centre'], row['latitude_centre'])
+            aires_dict[row['code_aire']] = {
+                'nom_aire': row['nom_aire'],
+                'population': row['population'],
+                'geometry': geometry
+            }
+        
+        # Second dictionnaire mapping ville -> infos
+        insee_dict = {}
+        for _, row in cities_with_aires.iterrows():
+            insee_dict[row['code_insee']] = {
+                'code_aire': row['code_aire'],
+                'nom_aire': row['nom_aire'],
+                'nom_standard': row['nom_standard'],
                 'population': row['population'],
                 'geometry': row['geometry']
             }
-    return agglomerations, unites_urbaines
-
-def filter_agglomerations(agglomerations, unites_urbaines, cities_gdf, pop_threshold, by_agg=True):
+        
+        # Màj cities_gdf
+        cities_gdf['code_aire'] = cities_with_aires['code_aire']
+        cities_gdf['nom_aire'] = cities_with_aires['nom_aire']
+        
+        # Vérification
+        print(f"Communes avec code_aire null: {cities_gdf['code_aire'].isna().sum()}")
+        print(f"Communes avec nom_aire null: {cities_gdf['nom_aire'].isna().sum()}")
+        print(f"Communes avec nom_aire == 'Commune hors attraction des villes': {(cities_gdf['nom_aire'] == 'Commune hors attraction des villes').sum()}")
+        print(f"Pour ces dernières communes, code_aire: {(cities_gdf[cities_gdf['nom_aire'] == 'Commune hors attraction des villes']['code_aire']).unique()}")
+        
+    return insee_dict, aires_dict
+   
+def filter_agglomerations(communes, aires, cities_gdf, pop_threshold, by_agg=True):
     """
     Supprime toutes les villes ou agglomérations (by_agg = True) dont la population est inférieure à pop_threshold.
-    Retourne les agglomerations avec les villes filtrées et cities_gdf filtré.
+    Retourne les communes (dictionnaire) filtrées et les villes (cities_gdf) filtrées.
     """
     if not by_agg:
         to_remove = cities_gdf[cities_gdf['population'] < pop_threshold]['code_insee'].tolist()
 
         for code_insee in to_remove:
-            if code_insee in agglomerations:
-                del agglomerations[code_insee]
+            if code_insee in communes:
+                del communes[code_insee]
 
         cities_gdf = cities_gdf[~cities_gdf['code_insee'].isin(to_remove)]
     else:
         to_remove = set()
-        for code_urbain, data in unites_urbaines.items():
+        for code_aire, data in aires.items():
             if data['population'] < pop_threshold:
                 # marquer toutes les villes de cette unité pour suppression
-                villes = [code_insee for code_insee, info in agglomerations.items()
-                        if info['code_unite_urbaine'] == code_urbain]
+                villes = [code_insee for code_insee, info in communes.items()
+                        if info['code_aire'] == code_aire]
                 to_remove.update(villes)
 
         for code_insee in to_remove:
-            if code_insee in agglomerations:
-                del agglomerations[code_insee]
+            if code_insee in communes:
+                del communes[code_insee]
 
         cities_gdf = cities_gdf[~cities_gdf['code_insee'].isin(to_remove)]
 
-    return agglomerations, cities_gdf
+    return communes, cities_gdf
 
 def has_direct_train_between(cities, stop_times, stop_to_city, ville1, ville2):
     """
@@ -392,8 +488,9 @@ def has_direct_train_between(cities, stop_times, stop_to_city, ville1, ville2):
                 trips_found.add(trip_id)
     return found, trips_found
 
-def prompt_train_between(cities, stop_times, stop_to_city, G_city, city_station_map, agglomerations, stops=None):
+def __prompt_train_between(cities, stop_times, stop_to_city, G_city, city_station_map, agglomerations, stops=None):
     """
+    DEPRECATED FUNCTION
     Demande à l'utilisateur deux villes, indique s'il existe une ligne directe, sinon affiche le plus court chemin et la gare associée à chaque ville.
     Affiche aussi la distance et le temps de trajet (si dispo) pour la liaison directe ou le plus court chemin.
     Retourne False si l'utilisateur entre 'x' pour quitter, True sinon.
@@ -486,7 +583,7 @@ def prompt_train_between(cities, stop_times, stop_to_city, G_city, city_station_
 
 if __name__ == "__main__":
     gtfs_zip = "resources/gtfs/france/opendata-sncf-transport.zip"
-    cities_fp = "resources/communes-france-datagouv-2025.csv"
+    cities_fp = "resources/france/communes-france-datagouv-2025.csv"
 
     # Charger les données GTFS
     stops, stop_times, trips, routes = load_gtfs(gtfs_zip)
@@ -497,13 +594,13 @@ if __name__ == "__main__":
     #print(f"Villes contenant Paris : {cities[cities[name_attr].str.contains('Paris', case=False, na=False)]}")
     print("Exemples de villes :", list(cities[name_attr].unique())[:10])
 
-    # Aggréger les villes en agglomérations
+    # Aggréger les villes en aires
     # /!\ À faire avant le filtrage sur population, plus lent mais nécessaire pour récupérer toutes les bonnes communes dans une agglomération.
-    agglomerations, unites_urbaines = aggregate_cities_to_agglomerations(cities)
-    print(f"{len(agglomerations)} agglomérations créées à partir des villes.") #unique?
+    communes, aires = aggregate_cities_to_aires(cities)
+    print(f"{len(aires)} aires créées à partir des villes.") #unique?
 
     # Charger les gares
-    gares_df = load_gares("resources/gares-de-voyageurs.geojson")
+    gares_df = load_gares("resources/france/gares-de-voyageurs.geojson")
     print(f"{len(gares_df)} gares chargées.")
     # Déplier les codes UIC pour 1 par ligne
     gares_df = (
@@ -523,28 +620,29 @@ if __name__ == "__main__":
     gares_to_cities, _ = associate_stations_to_cities(cities, stops_to_gares_df, gares_df) # Villes
     print(f"{len(gares_to_cities)} gares associées à des villes.")
 
-    print("Correspondance villes -> agglomérations :", list(agglomerations.items())[5:10])
+    print("Communes :", list(communes.items())[5:10])
+    print("Aires :", list(aires.items())[5:10])
 
-    by_agg = (key == 'code_unite_urbaine') # filtrage sur agglomérations et non villes
+    by_agg = (key == 'code_aire') # filtrage sur aires et non villes
 
     for pop_threshold in range(0, 501, 10): # 10k - 500k, graphes préconstruits
-        print("[DEBUG] Filtrage des", ("agglomérations" if by_agg else "villes"), "comme noeuds du graphe pour pop_threshold:", pop_threshold, "k")
-        agglomerations_bis, cities_bis = filter_agglomerations(agglomerations, unites_urbaines, cities, pop_threshold * 1000, by_agg)
-        G_city = build_city_graph_with_trips(cities_bis, stops, stop_times, trips, stops_to_gares, gares_to_cities, agglomerations_bis, unites_urbaines)
+        print("[DEBUG] Filtrage des", ("aires" if by_agg else "villes"), "comme noeuds du graphe pour pop_threshold:", pop_threshold, "k")
+        communes_bis, cities_bis = filter_agglomerations(communes, aires, cities, pop_threshold * 1000, by_agg)
+        G_city = build_city_graph_with_trips(cities_bis, stops, stop_times, trips, stops_to_gares, gares_to_cities, communes_bis, aires)
 
         print(f"{G_city.number_of_nodes()} villes, {G_city.number_of_edges()} liaisons directes.")
 
-        print(f"[DEBUG] Export du graph dans output/france_railway_network_pop_threshold_{pop_threshold}k.json.")
+        print(f"[DEBUG] Export du graph dans output/france_new/france_railway_network_pop_threshold_{pop_threshold}k.json.")
         export_data = export_graph_for_web_dashboard(
             G_city, 
             cities_bis, 
-            output_file="output/france_railway_network_pop_threshold_{}k.json".format(pop_threshold),
+            output_file="output/france_new/france_railway_network_pop_threshold_{}k.json".format(pop_threshold),
             country_code='france',
             key_column=key
         )
 
     # Visualisation
-    fig = plot_interactive_city_graph(G_city, cities_bis)
+    fig = plot_interactive_city_graph(G_city, cities_bis, aires)
     #fig.display_details("Contenu détaillé ici...", "Titre de la fenêtre")
 
         # s'il n'existe pas les villes intermédiaires dans une ligne de train alors on met quand même

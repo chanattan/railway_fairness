@@ -25,7 +25,7 @@ def build_city_graph(cities, stops, stop_times, trips, stops_to_gares, gares_to_
     # Ajouter les noeuds
     for _, row in cities.iterrows():
         city = row[key]
-        name = row['nom_unite_urbaine' if key == 'code_unite_urbaine' else name_attr]
+        name = row['nom_aire' if key == 'code_aire' else name_attr]
         G_city.add_node(city, name=name, insee='code_insee')
 
     merged = stop_times.merge(trips, on="trip_id").sort_values(["trip_id", "stop_sequence"])
@@ -51,7 +51,7 @@ def build_city_graph(cities, stops, stop_times, trips, stops_to_gares, gares_to_
                 gares_without_city += 1
                 continue
 
-            aggl = agglomerations.get(city_codeinsee, {}).get('code_unite_urbaine', None)
+            aggl = agglomerations.get(city_codeinsee, {}).get('code_aire', None)
             if aggl is None:
                 continue
 
@@ -140,7 +140,7 @@ def extract_train_type(stop_id):
     else:
         return 'UNKNOWN'
 
-def build_city_graph_with_trips(cities, stops, stop_times, trips, stops_to_gares, gares_to_cities, agglomerations, unites_urbaines):
+def build_city_graph_with_trips(cities, stops, stop_times, trips, stops_to_gares, gares_to_cities, communes, aires):
     """
     Version modifiée qui stocke les trip_ids et autres infos dans les arêtes
     """
@@ -155,10 +155,18 @@ def build_city_graph_with_trips(cities, stops, stop_times, trips, stops_to_gares
     # Ajouter les noeuds (unités urbaines ou villes)
     for _, row in cities.iterrows():
         city = row[key]
-        name = row['nom_unite_urbaine' if key == 'code_unite_urbaine' else name_attr]
+        name = row['nom_aire' if key == 'code_aire' else name_attr]
         #if name is not None and not pd.isna(name) and "Toulouse" in name:
-        #    print(f"[DEBUG] POPULATION {name} : {unites_urbaines[row['code_unite_urbaine']]['population'] if key == 'code_unite_urbaine' else city['population']}")
-        G_city.add_node(city, name=name, insee=row['code_insee'], population=unites_urbaines[row['code_unite_urbaine']]['population'] if key == 'code_unite_urbaine' else city['population'])
+        #    print(f"[DEBUG] POPULATION {name} : {unites_urbaines[row['code_aire']]['population'] if key == 'code_aire' else city['population']}")
+        #print("Aires :::::", aires.get(row['code_aire'], row) if key == 'code_aire' else row)
+        #print("DEBUG city:", city, name, row['code_insee'], aires[row['code_aire']]['population'] if key == 'code_aire' else row['population'])
+        pos = (aires[row['code_aire']]['geometry'].x, aires[row['code_aire']]['geometry'].y) if key == 'code_aire' else (row.geometry.x, row.geometry.y)
+        G_city.add_node(city,
+                        name=name,
+                        insee=row['code_insee'],
+                        population=aires.get(row['code_aire'], {}).get('population', row['population']) if key == 'code_aire' else row['population'],
+                        x=pos[0],
+                        y=pos[1])
 
     merged = stop_times.merge(trips, on="trip_id").sort_values(["trip_id", "stop_sequence"])
 
@@ -194,12 +202,12 @@ def build_city_graph_with_trips(cities, stops, stop_times, trips, stops_to_gares
                 gares_without_city += 1
                 continue
 
-            if key == 'code_unite_urbaine':
-                aggl = agglomerations.get(city_codeinsee, {}).get('code_unite_urbaine', None)
+            if key == 'code_aire':
+                aggl = communes.get(city_codeinsee, {}).get('code_aire', None)
                 if aggl is None:
                     continue
 
-            agglos_sequence.append(aggl if key == 'code_unite_urbaine' else city_codeinsee)
+            agglos_sequence.append(aggl if key == 'code_aire' else city_codeinsee)
             stops_sequence.append(s)
             uic_sequence.append(gare)
             train_types.append(train_type)
@@ -291,13 +299,13 @@ def build_city_graph_with_trips(cities, stops, stop_times, trips, stops_to_gares
     print(f"[DEBUG] {stops_without_gare} arrêts sans gare associée, {gares_without_city} gares sans ville associée.")
     return G_city
 
-def plot_interactive_city_graph(G_city, cities):
+def plot_interactive_city_graph(G_city, cities, aires):
     """
     Crée un graphe interactif avec Plotly - Version avec points virtuels pour hover des arêtes
     Basée sur la solution du forum Plotly
     """
     # Position des nœuds
-    pos = {str(row[key]): (row.geometry.x, row.geometry.y)
+    pos = {str(row[key]): (aires[row['code_aire']]['geometry'].x, aires[row['code_aire']]['geometry'].y) if key == 'code_aire' else (row.geometry.x, row.geometry.y)
            for _, row in cities.iterrows() if row[key] in G_city.nodes}
     
     # Debug: vérifier si les arêtes ont des informations trips

@@ -1,0 +1,1134 @@
+{
+  "metadata": {
+    "export_date": "2025-09-04T17:23:24.232882",
+    "country_code": "france",
+    "country_name": "France",
+    "graph_type": "railway_network",
+    "node_count": 29,
+    "edge_count": 64,
+    "coordinate_system": "WGS84",
+    "description": "France Railway Network Data",
+    "key_column": "code_aire",
+    "exporter_version": "1.0"
+  },
+  "nodes": [
+    {
+      "id": "002",
+      "name": "Lyon",
+      "x": 4.836,
+      "y": 45.764,
+      "connections": 9,
+      "population": 2294328,
+      "type": "major",
+      "insee": "69299"
+    },
+    {
+      "id": "GEN",
+      "name": "Genève - Annemasse (partie française)",
+      "x": 6.242,
+      "y": 46.191,
+      "connections": 1,
+      "population": 444368,
+      "type": "medium",
+      "insee": "74315"
+    },
+    {
+      "id": "001",
+      "name": "Paris",
+      "x": 2.352,
+      "y": 48.857,
+      "connections": 24,
+      "population": 13138225,
+      "type": "major",
+      "insee": "95690"
+    },
+    {
+      "id": "017",
+      "name": "Nice",
+      "x": 7.238,
+      "y": 43.712,
+      "connections": 1,
+      "population": 626218,
+      "type": "major",
+      "insee": "06161"
+    },
+    {
+      "id": "031",
+      "name": "Cannes - Antibes",
+      "x": 7.106,
+      "y": 43.588,
+      "connections": 2,
+      "population": 393687,
+      "type": "medium",
+      "insee": "83133"
+    },
+    {
+      "id": "005",
+      "name": "Toulouse",
+      "x": 1.432,
+      "y": 43.596,
+      "connections": 6,
+      "population": 1490640,
+      "type": "major",
+      "insee": "82194"
+    },
+    {
+      "id": "003",
+      "name": "Marseille - Aix-en-Provence",
+      "x": 5.399,
+      "y": 43.536,
+      "connections": 4,
+      "population": 1888788,
+      "type": "major",
+      "insee": "84147"
+    },
+    {
+      "id": "024",
+      "name": "Caen",
+      "x": -0.37,
+      "y": 49.185,
+      "connections": 4,
+      "population": 473636,
+      "type": "medium",
+      "insee": "14761"
+    },
+    {
+      "id": "006",
+      "name": "Bordeaux",
+      "x": -0.574,
+      "y": 44.857,
+      "connections": 4,
+      "population": 1393764,
+      "type": "major",
+      "insee": "40200"
+    },
+    {
+      "id": "028",
+      "name": "Dijon",
+      "x": 5.038,
+      "y": 47.323,
+      "connections": 4,
+      "population": 414799,
+      "type": "medium",
+      "insee": "70406"
+    },
+    {
+      "id": "013",
+      "name": "Rennes",
+      "x": -1.682,
+      "y": 48.112,
+      "connections": 6,
+      "population": 771320,
+      "type": "major",
+      "insee": "35363"
+    },
+    {
+      "id": "015",
+      "name": "Rouen",
+      "x": 1.093,
+      "y": 49.441,
+      "connections": 3,
+      "population": 708816,
+      "type": "major",
+      "insee": "76759"
+    },
+    {
+      "id": "025",
+      "name": "Orléans",
+      "x": 1.916,
+      "y": 47.883,
+      "connections": 3,
+      "population": 456452,
+      "type": "medium",
+      "insee": "45346"
+    },
+    {
+      "id": "032",
+      "name": "Brest",
+      "x": -4.503,
+      "y": 48.4,
+      "connections": 3,
+      "population": 375744,
+      "type": "medium",
+      "insee": "29299"
+    },
+    {
+      "id": "012",
+      "name": "Montpellier",
+      "x": 3.868,
+      "y": 43.613,
+      "connections": 5,
+      "population": 823120,
+      "type": "major",
+      "insee": "34344"
+    },
+    {
+      "id": "019",
+      "name": "Tours",
+      "x": 0.696,
+      "y": 47.399,
+      "connections": 6,
+      "population": 522597,
+      "type": "major",
+      "insee": "37281"
+    },
+    {
+      "id": "014",
+      "name": "Grenoble",
+      "x": 5.721,
+      "y": 45.182,
+      "connections": 2,
+      "population": 722904,
+      "type": "major",
+      "insee": "38567"
+    },
+    {
+      "id": "023",
+      "name": "Saint-Étienne",
+      "x": 4.379,
+      "y": 45.43,
+      "connections": 1,
+      "population": 500562,
+      "type": "major",
+      "insee": "43265"
+    },
+    {
+      "id": "008",
+      "name": "Nantes",
+      "x": -1.548,
+      "y": 47.232,
+      "connections": 5,
+      "population": 1031953,
+      "type": "major",
+      "insee": "85262"
+    },
+    {
+      "id": "026",
+      "name": "Angers",
+      "x": -0.556,
+      "y": 47.477,
+      "connections": 5,
+      "population": 440844,
+      "type": "medium",
+      "insee": "49377"
+    },
+    {
+      "id": "020",
+      "name": "Nancy",
+      "x": 6.176,
+      "y": 48.69,
+      "connections": 4,
+      "population": 508793,
+      "type": "major",
+      "insee": "88529"
+    },
+    {
+      "id": "033",
+      "name": "Metz",
+      "x": 6.196,
+      "y": 49.108,
+      "connections": 3,
+      "population": 375059,
+      "type": "medium",
+      "insee": "57755"
+    },
+    {
+      "id": "010",
+      "name": "Strasbourg (partie française)",
+      "x": 7.768,
+      "y": 48.571,
+      "connections": 4,
+      "population": 864993,
+      "type": "major",
+      "insee": "88501"
+    },
+    {
+      "id": "004",
+      "name": "Lille (partie française)",
+      "x": 3.048,
+      "y": 50.632,
+      "connections": 2,
+      "population": 1521660,
+      "type": "major",
+      "insee": "62907"
+    },
+    {
+      "id": "022",
+      "name": "Clermont-Ferrand",
+      "x": 3.116,
+      "y": 45.786,
+      "connections": 3,
+      "population": 508354,
+      "type": "major",
+      "insee": "63473"
+    },
+    {
+      "id": "030",
+      "name": "Perpignan",
+      "x": 2.899,
+      "y": 42.697,
+      "connections": 2,
+      "population": 422786,
+      "type": "medium",
+      "insee": "66233"
+    },
+    {
+      "id": "029",
+      "name": "Mulhouse",
+      "x": 7.326,
+      "y": 47.749,
+      "connections": 4,
+      "population": 408968,
+      "type": "medium",
+      "insee": "90058"
+    },
+    {
+      "id": "034",
+      "name": "Le Mans",
+      "x": 0.2,
+      "y": 47.988,
+      "connections": 5,
+      "population": 367437,
+      "type": "medium",
+      "insee": "72386"
+    },
+    {
+      "id": "018",
+      "name": "Toulon",
+      "x": 5.932,
+      "y": 43.136,
+      "connections": 3,
+      "population": 581948,
+      "type": "major",
+      "insee": "83153"
+    }
+  ],
+  "edges": [
+    {
+      "source": "002",
+      "target": "028",
+      "distance": 150.7079241487272,
+      "duration": 84.0,
+      "trips": 608,
+      "route_type": "intercity",
+      "train_types": {
+        "TER": 327,
+        "TGV": 267,
+        "INTERCITES": 14
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "002",
+      "target": "019",
+      "distance": 337.0926608434153,
+      "duration": 288.0,
+      "trips": 86,
+      "route_type": "high_speed",
+      "train_types": {
+        "TER": 27,
+        "INTERCITES": 59
+      },
+      "dominant_train_type": "INTERCITES"
+    },
+    {
+      "source": "002",
+      "target": "014",
+      "distance": 55.603331664410774,
+      "duration": 54.0,
+      "trips": 285,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 236,
+        "TGV": 49
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "002",
+      "target": "003",
+      "distance": 243.68734573321106,
+      "duration": 63.0,
+      "trips": 681,
+      "route_type": "intercity",
+      "train_types": {
+        "TER": 47,
+        "TGV": 617,
+        "ICE": 17
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "002",
+      "target": "029",
+      "distance": 290.45553525507154,
+      "duration": 166.0,
+      "trips": 36,
+      "route_type": "intercity",
+      "train_types": {
+        "TGV": 18,
+        "ICE": 18
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "002",
+      "target": "001",
+      "distance": 379.4967110475336,
+      "duration": 103.0,
+      "trips": 1079,
+      "route_type": "high_speed",
+      "train_types": {
+        "TGV": 1079
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "002",
+      "target": "012",
+      "distance": 249.8099529362562,
+      "duration": 78.0,
+      "trips": 390,
+      "route_type": "intercity",
+      "train_types": {
+        "TGV": 390
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "002",
+      "target": "023",
+      "distance": 18.473686279541383,
+      "duration": 14.0,
+      "trips": 762,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 62,
+        "TER": 700
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "002",
+      "target": "022",
+      "distance": 133.079843648063,
+      "duration": 136.0,
+      "trips": 61,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 61
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "GEN",
+      "target": "001",
+      "distance": 413.04032741726206,
+      "duration": 198.0,
+      "trips": 16,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 16
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "006",
+      "distance": 483.75346453703355,
+      "duration": 116.0,
+      "trips": 691,
+      "route_type": "high_speed",
+      "train_types": {
+        "TGV": 691
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "019",
+      "distance": 187.7423421518992,
+      "duration": 50.0,
+      "trips": 479,
+      "route_type": "intercity",
+      "train_types": {
+        "TGV": 475,
+        "ICE": 4
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "015",
+      "distance": 26.10837042333507,
+      "duration": 19.0,
+      "trips": 495,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 469,
+        "TGV": 26
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "001",
+      "target": "004",
+      "distance": 158.57993179490174,
+      "duration": 51.0,
+      "trips": 1225,
+      "route_type": "intercity",
+      "train_types": {
+        "TER": 56,
+        "TGV": 1169
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "028",
+      "distance": 180.05676377740463,
+      "duration": 93.0,
+      "trips": 409,
+      "route_type": "intercity",
+      "train_types": {
+        "TER": 321,
+        "TGV": 88
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "001",
+      "target": "010",
+      "distance": 364.4809087573004,
+      "duration": 92.0,
+      "trips": 287,
+      "route_type": "high_speed",
+      "train_types": {
+        "TGV": 230,
+        "TER": 2,
+        "ICE": 55
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "033",
+      "distance": 247.6769395497569,
+      "duration": 69.0,
+      "trips": 426,
+      "route_type": "intercity",
+      "train_types": {
+        "TGV": 424,
+        "ICE": 2
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "020",
+      "distance": 258.9921690001871,
+      "duration": 88.0,
+      "trips": 193,
+      "route_type": "intercity",
+      "train_types": {
+        "TGV": 157,
+        "TER": 36
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "034",
+      "distance": 122.5608917295386,
+      "duration": 47.0,
+      "trips": 706,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 596,
+        "TER": 110
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "024",
+      "distance": 150.79839793228612,
+      "duration": 85.0,
+      "trips": 105,
+      "route_type": "intercity",
+      "train_types": {
+        "TER": 105
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "001",
+      "target": "025",
+      "distance": 39.09244971193919,
+      "duration": 41.0,
+      "trips": 734,
+      "route_type": "regional",
+      "train_types": {
+        "INTERCITES": 170,
+        "TER": 564
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "001",
+      "target": "005",
+      "distance": 585.865804856029,
+      "duration": 433.0,
+      "trips": 8,
+      "route_type": "regional",
+      "train_types": {
+        "INTERCITES": 8
+      },
+      "dominant_train_type": "INTERCITES"
+    },
+    {
+      "source": "001",
+      "target": "026",
+      "distance": 251.89491251717297,
+      "duration": 75.0,
+      "trips": 127,
+      "route_type": "intercity",
+      "train_types": {
+        "TGV": 127
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "022",
+      "distance": 332.6103115990524,
+      "duration": 193.0,
+      "trips": 378,
+      "route_type": "high_speed",
+      "train_types": {
+        "INTERCITES": 378
+      },
+      "dominant_train_type": "INTERCITES"
+    },
+    {
+      "source": "001",
+      "target": "003",
+      "distance": 640.6528265134061,
+      "duration": 175.0,
+      "trips": 235,
+      "route_type": "high_speed",
+      "train_types": {
+        "TGV": 235
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "012",
+      "distance": 594.0741139238424,
+      "duration": 192.0,
+      "trips": 268,
+      "route_type": "high_speed",
+      "train_types": {
+        "TGV": 268
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "018",
+      "distance": 692.2868872484904,
+      "duration": 224.0,
+      "trips": 63,
+      "route_type": "high_speed",
+      "train_types": {
+        "TGV": 63
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "014",
+      "distance": 478.62401523772087,
+      "duration": 222.0,
+      "trips": 2,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 2
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "013",
+      "distance": 305.55550884487025,
+      "duration": 85.0,
+      "trips": 393,
+      "route_type": "high_speed",
+      "train_types": {
+        "TGV": 393
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "008",
+      "distance": 339.19534010490827,
+      "duration": 117.0,
+      "trips": 31,
+      "route_type": "high_speed",
+      "train_types": {
+        "TGV": 31
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "001",
+      "target": "029",
+      "distance": 387.0711388766309,
+      "duration": 158.0,
+      "trips": 136,
+      "route_type": "high_speed",
+      "train_types": {
+        "TER": 136
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "001",
+      "target": "032",
+      "distance": 502.3190031282547,
+      "duration": 198.0,
+      "trips": 8,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 8
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "017",
+      "target": "031",
+      "distance": 12.500810808355899,
+      "duration": 13.0,
+      "trips": 756,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 533,
+        "TGV": 196,
+        "INTERCITES": 27
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "031",
+      "target": "018",
+      "distance": 100.0668515801331,
+      "duration": 71.0,
+      "trips": 244,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 217,
+        "INTERCITES": 27
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "005",
+      "target": "006",
+      "distance": 209.53108905717872,
+      "duration": 140.0,
+      "trips": 328,
+      "route_type": "intercity",
+      "train_types": {
+        "TGV": 120,
+        "INTERCITES": 208
+      },
+      "dominant_train_type": "INTERCITES"
+    },
+    {
+      "source": "005",
+      "target": "025",
+      "distance": 481.15445957911953,
+      "duration": 353.0,
+      "trips": 85,
+      "route_type": "high_speed",
+      "train_types": {
+        "INTERCITES": 85
+      },
+      "dominant_train_type": "INTERCITES"
+    },
+    {
+      "source": "005",
+      "target": "012",
+      "distance": 170.99913787160693,
+      "duration": 128.0,
+      "trips": 310,
+      "route_type": "intercity",
+      "train_types": {
+        "INTERCITES": 201,
+        "TGV": 75,
+        "TER": 34
+      },
+      "dominant_train_type": "INTERCITES"
+    },
+    {
+      "source": "005",
+      "target": "030",
+      "distance": 115.72807827194754,
+      "duration": 115.0,
+      "trips": 128,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 128
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "005",
+      "target": "022",
+      "distance": 236.82793157766108,
+      "duration": 314.0,
+      "trips": 14,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 14
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "003",
+      "target": "018",
+      "distance": 19.370454418659676,
+      "duration": 20.0,
+      "trips": 438,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 242,
+        "INTERCITES": 27,
+        "TER": 169
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "003",
+      "target": "012",
+      "distance": 109.1402246914427,
+      "duration": 94.0,
+      "trips": 234,
+      "route_type": "regional",
+      "train_types": {
+        "INTERCITES": 176,
+        "TER": 58
+      },
+      "dominant_train_type": "INTERCITES"
+    },
+    {
+      "source": "024",
+      "target": "034",
+      "distance": 111.2412252342696,
+      "duration": 86.0,
+      "trips": 69,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 69
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "024",
+      "target": "015",
+      "distance": 82.94965664773893,
+      "duration": 71.0,
+      "trips": 119,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 119
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "024",
+      "target": "013",
+      "distance": 146.8298077700846,
+      "duration": 197.0,
+      "trips": 24,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 24
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "006",
+      "target": "019",
+      "distance": 301.3006141675166,
+      "duration": 79.0,
+      "trips": 233,
+      "route_type": "high_speed",
+      "train_types": {
+        "TGV": 229,
+        "ICE": 4
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "006",
+      "target": "008",
+      "distance": 276.59880652327973,
+      "duration": 250.0,
+      "trips": 48,
+      "route_type": "intercity",
+      "train_types": {
+        "INTERCITES": 48
+      },
+      "dominant_train_type": "INTERCITES"
+    },
+    {
+      "source": "028",
+      "target": "029",
+      "distance": 180.00058974581512,
+      "duration": 61.0,
+      "trips": 359,
+      "route_type": "intercity",
+      "train_types": {
+        "TGV": 359
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "028",
+      "target": "020",
+      "distance": 151.42336785422486,
+      "duration": 125.0,
+      "trips": 21,
+      "route_type": "intercity",
+      "train_types": {
+        "INTERCITES": 14,
+        "TER": 7
+      },
+      "dominant_train_type": "INTERCITES"
+    },
+    {
+      "source": "013",
+      "target": "034",
+      "distance": 119.39756769942157,
+      "duration": 43.0,
+      "trips": 288,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 274,
+        "TER": 14
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "013",
+      "target": "008",
+      "distance": 99.00636749448016,
+      "duration": 75.0,
+      "trips": 105,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 105
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "013",
+      "target": "032",
+      "distance": 195.11500364212552,
+      "duration": 116.0,
+      "trips": 251,
+      "route_type": "intercity",
+      "train_types": {
+        "TGV": 153,
+        "TER": 98
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "013",
+      "target": "026",
+      "distance": 109.5365446934844,
+      "duration": 86.0,
+      "trips": 74,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 74
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "015",
+      "target": "004",
+      "distance": 168.8358661590814,
+      "duration": 139.0,
+      "trips": 16,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 16
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "025",
+      "target": "019",
+      "distance": 82.24540746482191,
+      "duration": 42.0,
+      "trips": 376,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 376
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "032",
+      "target": "008",
+      "distance": 255.0970044407179,
+      "duration": 195.0,
+      "trips": 14,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 14
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "012",
+      "target": "030",
+      "distance": 109.70420074930968,
+      "duration": 98.0,
+      "trips": 275,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 193,
+        "INTERCITES": 14,
+        "TER": 68
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "019",
+      "target": "034",
+      "distance": 48.49850434222981,
+      "duration": 37.0,
+      "trips": 118,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 118
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "019",
+      "target": "026",
+      "distance": 68.20945857395012,
+      "duration": 43.0,
+      "trips": 287,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 55,
+        "TER": 171,
+        "INTERCITES": 61
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "008",
+      "target": "026",
+      "distance": 51.30956934451461,
+      "duration": 30.0,
+      "trips": 1018,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 541,
+        "INTERCITES": 61,
+        "TER": 416
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "026",
+      "target": "034",
+      "distance": 61.64325368559797,
+      "duration": 36.0,
+      "trips": 519,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 312,
+        "TER": 207
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "020",
+      "target": "010",
+      "distance": 87.32835487123502,
+      "duration": 54.0,
+      "trips": 308,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 80,
+        "TER": 228
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "020",
+      "target": "033",
+      "distance": 30.52578035842226,
+      "duration": 21.0,
+      "trips": 452,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 452
+      },
+      "dominant_train_type": "TER"
+    },
+    {
+      "source": "033",
+      "target": "010",
+      "distance": 95.6123264711538,
+      "duration": 34.0,
+      "trips": 529,
+      "route_type": "regional",
+      "train_types": {
+        "TGV": 348,
+        "TER": 179,
+        "ICE": 2
+      },
+      "dominant_train_type": "TGV"
+    },
+    {
+      "source": "010",
+      "target": "029",
+      "distance": 72.4492546671228,
+      "duration": 41.0,
+      "trips": 816,
+      "route_type": "regional",
+      "train_types": {
+        "TER": 513,
+        "TGV": 285,
+        "ICE": 18
+      },
+      "dominant_train_type": "TER"
+    }
+  ],
+  "statistics": {
+    "total_cities": 29,
+    "total_connections": 64,
+    "major_cities": 18,
+    "medium_cities": 11,
+    "small_cities": 0,
+    "total_trips": 20259,
+    "avg_distance": 218.1502715882212,
+    "avg_duration": 112.71875,
+    "high_speed_routes": 13,
+    "intercity_routes": 17,
+    "regional_routes": 34,
+    "max_connections": 24,
+    "total_population": 34472763
+  }
+}
