@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "export_date": "2025-09-04T16:41:25.389018",
+    "export_date": "2025-09-05T13:58:16.783577",
     "country_code": "france",
     "country_name": "France",
     "graph_type": "railway_network",
@@ -20313,9 +20313,9 @@
     "total_trips": 130468,
     "avg_distance": 39.45229909227465,
     "avg_duration": 20.446153846153845,
-    "high_speed_routes": 12,
-    "intercity_routes": 27,
-    "regional_routes": 1066,
+    "high_speed_routes": 142,
+    "intercity_routes": 63,
+    "regional_routes": 883,
     "max_connections": 78,
     "total_population": 58459191
   }

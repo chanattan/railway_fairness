@@ -270,9 +270,9 @@ class RailwayNetworkExporter:
                 'total_trips': sum(e['trips'] for e in edges),
                 'avg_distance': sum(e['distance'] for e in edges) / len(edges) if edges else 0,
                 'avg_duration': sum(e['duration'] for e in edges) / len(edges) if edges else 0,
-                'high_speed_routes': len([e for e in edges if e['route_type'] == 'high_speed']),
-                'intercity_routes': len([e for e in edges if e['route_type'] == 'intercity']),
-                'regional_routes': len([e for e in edges if e['route_type'] == 'regional']),
+                'high_speed_routes': len([e for e in edges if e['dominant_train_type'] == 'TGV']),
+                'intercity_routes': len([e for e in edges if e['dominant_train_type'] == 'INTERCITES']),
+                'regional_routes': len([e for e in edges if e['dominant_train_type'] == 'TER']),
                 'max_connections': max([n['connections'] for n in nodes]) if nodes else 0,
                 'total_population': sum([n['population'] for n in nodes]) if nodes else 0
             }

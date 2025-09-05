@@ -258,12 +258,13 @@ def build_city_graph_with_trips(cities, stops, stop_times, trips, stops_to_gares
             })
 
             if G_city.has_edge(c1, c2):
-                if dist < G_city[c1][c2]["distance"]:
-                    G_city[c1][c2]["distance"] = dist
+                #if dist < G_city[c1][c2]["distance"]:
                 if duration < G_city[c1][c2]["duration"]:
                     G_city[c1][c2]["duration"] = duration
+                    G_city[c1][c2]["distance"] = dist
+                    G_city[c1][c2]["trip_id"] = trip_id  # trip le plus rapide
             else:
-                G_city.add_edge(c1, c2, distance=dist, duration=duration)
+                G_city.add_edge(c1, c2, distance=dist, duration=duration, trip_id=trip_id)
 
     # Ajouter les trip_ids aux arêtes
     for edge in G_city.edges():

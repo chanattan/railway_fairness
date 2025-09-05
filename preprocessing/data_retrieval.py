@@ -8,6 +8,8 @@ from geopy.distance import geodesic
 import pandas as pd
 import json
 
+# Some functions are no longger used but kept for reference
+
 def load_wikidata_regions(path="query.json", pop_threshold=100000):
     """
     Load cities with population and coordinates from a Wikidata query file,
