@@ -122,11 +122,17 @@ def plot_city_graph(G_city, cities):
     nx.draw_networkx_labels(G_city, pos, labels, font_size=6)
     plt.show(block=False)
 
-def extract_train_type(stop_id):
+def extract_train_type(stop_modes, stop_id):
     """
     Extrait le type de train depuis le stop_id
     Retourne: 'TER', 'TGV', 'INTERCITES', 'ICE', 'UNKNOWN'
     """
+    # On vérifie le route type pour préfiltrer, ensuite on regarde le type précisément.
+    # 0 - Tram, 1 - Subway, 2 - Rail, 3 - Bus, 4 - Ferry, ...
+    #print("DEBUG --- STOP modes :", stop_id, stop_modes.get(stop_id, set()))
+    if 2 not in stop_modes[stop_id]:
+        # C'est pas un train
+        return 'CAR' # Default filtré
     if 'OCECar' in stop_id:
         return 'CAR'  # À filtrer
     elif 'OCETrain TER' in stop_id:
@@ -140,7 +146,7 @@ def extract_train_type(stop_id):
     else:
         return 'UNKNOWN'
 
-def build_city_graph_with_trips(cities, stops, stop_times, trips, stops_to_gares, gares_to_cities, communes, aires):
+def build_city_graph_with_trips(cities, stop_modes, stops, stop_times, trips, stops_to_gares, gares_to_cities, communes, aires):
     """
     Version modifiée qui stocke les trip_ids et autres infos dans les arêtes
     """
@@ -187,7 +193,7 @@ def build_city_graph_with_trips(cities, stops, stop_times, trips, stops_to_gares
         train_types = []
 
         for _, s in group.iterrows():
-            train_type = extract_train_type(s.stop_id)
+            train_type = extract_train_type(stop_modes, s.stop_id)
             if train_type == 'CAR':
                 filtered_cars += 1
                 continue

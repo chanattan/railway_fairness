@@ -10,6 +10,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from data_exporter import export_graph_for_web_dashboard
 
+"""
+    Main file: load data, preprocess, build graph, export results.
+"""
+
 def load_gtfs(gtfs_zip):
     with zipfile.ZipFile(gtfs_zip, 'r') as z:
         stops = pd.read_csv(z.open('stops.txt'))
@@ -616,6 +620,14 @@ if __name__ == "__main__":
     #nb_associes = stops_to_gares["gare_name"].notna().sum()
     #print(f"{nb_associes}/{len(stops)} arrêts associés à des gares.")
 
+    # Créer le mapping stop_id -> mode de transport
+    # trip_id -> route_type
+    trips_routes = trips.merge(routes[["route_id", "route_type"]], on="route_id", how="left")
+    # stop_id -> route_type
+    stop_route_types = stop_times.merge(trips_routes[["trip_id", "route_type"]], on="trip_id", how="left")
+    # Grouper par stop_id et collecter les modes de transport
+    stop_modes = stop_route_types.groupby("stop_id")["route_type"].apply(set).to_dict()
+
     # Associer les gares aux villes
     gares_to_cities, _ = associate_stations_to_cities(cities, stops_to_gares_df, gares_df) # Villes
     print(f"{len(gares_to_cities)} gares associées à des villes.")
@@ -628,7 +640,7 @@ if __name__ == "__main__":
     for pop_threshold in range(0, 501, 10): # 10k - 500k, graphes préconstruits
         print("[DEBUG] Filtrage des", ("aires" if by_agg else "villes"), "comme noeuds du graphe pour pop_threshold:", pop_threshold, "k")
         communes_bis, cities_bis = filter_agglomerations(communes, aires, cities, pop_threshold * 1000, by_agg)
-        G_city = build_city_graph_with_trips(cities_bis, stops, stop_times, trips, stops_to_gares, gares_to_cities, communes_bis, aires)
+        G_city = build_city_graph_with_trips(cities_bis, stop_modes, stops, stop_times, trips, stops_to_gares, gares_to_cities, communes_bis, aires)
 
         print(f"{G_city.number_of_nodes()} villes, {G_city.number_of_edges()} liaisons directes.")
 
