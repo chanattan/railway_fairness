@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "export_date": "2025-09-11T22:52:25.273257",
+    "country_code": "switzerland",
+    "country_name": "Switzerland",
+    "graph_type": "railway_network",
+    "node_count": 0,
+    "edge_count": 0,
+    "coordinate_system": "WGS84",
+    "description": "Switzerland Railway Network Data",
+    "key_column": "code_commune",
+    "exporter_version": "1.0"
+  },
+  "nodes": [],
+  "edges": [],
+  "statistics": {
+    "total_cities": 0,
+    "total_connections": 0,
+    "major_cities": 0,
+    "medium_cities": 0,
+    "small_cities": 0,
+    "total_trips": 0,
+    "avg_distance": 0,
+    "avg_duration": 0,
+    "high_speed_routes": 0,
+    "intercity_routes": 0,
+    "regional_routes": 0,
+    "max_connections": 0,
+    "total_population": 0
+  }
+}

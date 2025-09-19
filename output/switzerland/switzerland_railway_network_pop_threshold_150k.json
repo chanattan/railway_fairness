@@ -1,0 +1,105 @@
+{
+  "metadata": {
+    "export_date": "2025-09-11T22:45:17.525687",
+    "country_code": "switzerland",
+    "country_name": "Switzerland",
+    "graph_type": "railway_network",
+    "node_count": 3,
+    "edge_count": 3,
+    "coordinate_system": "WGS84",
+    "description": "Switzerland Railway Network Data",
+    "key_column": "code_commune",
+    "exporter_version": "1.0"
+  },
+  "nodes": [
+    {
+      "id": "261",
+      "name": "Zürich",
+      "x": 2682515.724436742,
+      "y": 1248524.2547660312,
+      "connections": 2,
+      "population": 436370,
+      "type": "major",
+      "code": "261"
+    },
+    {
+      "id": "2701",
+      "name": "Basel",
+      "x": 2611570.314741036,
+      "y": 1267295.7609561754,
+      "connections": 2,
+      "population": 177522,
+      "type": "medium",
+      "code": "2701"
+    },
+    {
+      "id": "6621",
+      "name": "Genève",
+      "x": 2500041.452631579,
+      "y": 1117965.252631579,
+      "connections": 2,
+      "population": 208991,
+      "type": "major",
+      "code": "6621"
+    }
+  ],
+  "edges": [
+    {
+      "source": "261",
+      "target": "2701",
+      "distance": 73.55842290030718,
+      "duration": 51.0,
+      "trips": 10223,
+      "route_type": "regional",
+      "trip_id": "734.TA.91-2N-Y-j25-1.264.R",
+      "train_types": {
+        "HIGH-SPEED": 9150,
+        "INTERCITY": 1053,
+        "INTER-REGIONAL": 20
+      },
+      "dominant_train_type": "HIGH-SPEED"
+    },
+    {
+      "source": "261",
+      "target": "6621",
+      "distance": 223.7785266457151,
+      "duration": 173.0,
+      "trips": 1183,
+      "route_type": "intercity",
+      "trip_id": "100.TA.91-2H-Y-j25-1.55.H",
+      "train_types": {
+        "INTERCITY": 466,
+        "HIGH-SPEED": 717
+      },
+      "dominant_train_type": "HIGH-SPEED"
+    },
+    {
+      "source": "2701",
+      "target": "6621",
+      "distance": 184.88689994361755,
+      "duration": 219.0,
+      "trips": 2,
+      "route_type": "regional",
+      "trip_id": "53.TA.91-D3-Y-j25-1.49.H",
+      "train_types": {
+        "HIGH-SPEED": 2
+      },
+      "dominant_train_type": "HIGH-SPEED"
+    }
+  ],
+  "statistics": {
+    "total_cities": 3,
+    "total_connections": 3,
+    "major_cities": 2,
+    "medium_cities": 1,
+    "small_cities": 0,
+    "total_trips": 11408,
+    "avg_distance": 160.74128316321327,
+    "avg_duration": 147.66666666666666,
+    "high_speed_routes": 0,
+    "intercity_routes": 0,
+    "regional_routes": 0,
+    "max_connections": 2,
+    "total_population": 822883
+  }
+}

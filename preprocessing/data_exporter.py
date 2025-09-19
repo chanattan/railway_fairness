@@ -1,4 +1,5 @@
 import json
+from config import *
 import networkx as nx
 import pandas as pd
 import numpy as np
@@ -10,7 +11,7 @@ class RailwayNetworkExporter:
     """Export railway networks from NetworkX graphs to JSON format for web dashboard"""
     
     def __init__(self):
-        self.country_configs = {
+        self.country_configs = { # Statistics to be filled with real data.
             'france': {
                 'name': 'France',
                 'major_city_threshold': 500000,
@@ -25,6 +26,14 @@ class RailwayNetworkExporter:
                 'medium_city_threshold': 80000,
                 'high_speed_trips': 25,
                 'intercity_trips': 15,
+                'coordinate_system': 'WGS84'
+            },
+            'switzerland': {
+                'name': 'Switzerland',
+                'major_city_threshold': 200000,
+                'medium_city_threshold': 50000,
+                'high_speed_trips': 15,
+                'intercity_trips': 10,
                 'coordinate_system': 'WGS84'
             },
             'spain': {
@@ -128,7 +137,7 @@ class RailwayNetworkExporter:
                             city_match = cities_gdf[cities_gdf[key_column] == node_id]
                         
                         if city_match is not None and not city_match.empty:
-                            name_col = 'nom_standard' if 'nom_standard' in cities_gdf.columns else 'name'
+                            name_col = name_attr if name_attr in cities_gdf.columns else 'name'
                             if name_col in city_match.columns:
                                 matched_name = city_match.iloc[0][name_col]
                                 if not pd.isna(matched_name):
@@ -181,13 +190,8 @@ class RailwayNetworkExporter:
                 except Exception as e:
                     print(f"Warning: Could not get coordinates for {name}: {e}")
             
-            # Get population
             population = node_data.get('population', 50000)  # default
-            
-            # Get connections
             connections = G_city.degree[node_id]
-            
-            # Classify city type
             city_type = self.classify_city_type(connections, population, config)
             
             node = {
@@ -302,7 +306,7 @@ def export_graph_for_web_dashboard(G_city: nx.Graph,
                                   cities_gdf: pd.DataFrame = None, 
                                   output_file: str = "output/france_railway_network.json",
                                   country_code: str = 'france',
-                                  key_column: str = 'code_unite_urbaine'):
+                                  key_column: str = 'code_aire'):
     """
     Convenience function to export graph from data_test.py
     

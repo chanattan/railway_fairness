@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "export_date": "2025-09-04T17:13:00.965949",
+    "export_date": "2025-09-13T00:10:27.562187",
     "country_code": "france",
     "country_name": "France",
     "graph_type": "railway_network",
     "node_count": 50,
-    "edge_count": 123,
+    "edge_count": 125,
     "coordinate_system": "WGS84",
     "description": "France Railway Network Data",
     "key_column": "code_aire",
@@ -20,7 +20,7 @@
       "connections": 12,
       "population": 2294328,
       "type": "major",
-      "insee": "69299"
+      "code": "002"
     },
     {
       "id": "GEN",
@@ -30,7 +30,7 @@
       "connections": 2,
       "population": 444368,
       "type": "medium",
-      "insee": "74315"
+      "code": "GEN"
     },
     {
       "id": "050",
@@ -40,7 +40,7 @@
       "connections": 4,
       "population": 261463,
       "type": "medium",
-      "insee": "73330"
+      "code": "050"
     },
     {
       "id": "036",
@@ -50,7 +50,7 @@
       "connections": 5,
       "population": 355889,
       "type": "medium",
-      "insee": "51662"
+      "code": "036"
     },
     {
       "id": "001",
@@ -60,7 +60,7 @@
       "connections": 37,
       "population": 13138225,
       "type": "major",
-      "insee": "95690"
+      "code": "001"
     },
     {
       "id": "017",
@@ -70,7 +70,7 @@
       "connections": 1,
       "population": 626218,
       "type": "major",
-      "insee": "06161"
+      "code": "017"
     },
     {
       "id": "031",
@@ -80,7 +80,7 @@
       "connections": 2,
       "population": 393687,
       "type": "medium",
-      "insee": "83133"
+      "code": "031"
     },
     {
       "id": "049",
@@ -90,17 +90,17 @@
       "connections": 6,
       "population": 256245,
       "type": "medium",
-      "insee": "26382"
+      "code": "049"
     },
     {
       "id": "005",
       "name": "Toulouse",
       "x": 1.432,
       "y": 43.596,
-      "connections": 6,
+      "connections": 7,
       "population": 1490640,
       "type": "major",
-      "insee": "82194"
+      "code": "005"
     },
     {
       "id": "054",
@@ -110,7 +110,7 @@
       "connections": 3,
       "population": 221782,
       "type": "medium",
-      "insee": "10443"
+      "code": "054"
     },
     {
       "id": "003",
@@ -120,7 +120,7 @@
       "connections": 5,
       "population": 1888788,
       "type": "major",
-      "insee": "84147"
+      "code": "003"
     },
     {
       "id": "040",
@@ -130,7 +130,7 @@
       "connections": 6,
       "population": 339324,
       "type": "medium",
-      "insee": "84142"
+      "code": "040"
     },
     {
       "id": "024",
@@ -140,7 +140,7 @@
       "connections": 4,
       "population": 473636,
       "type": "medium",
-      "insee": "14761"
+      "code": "024"
     },
     {
       "id": "051",
@@ -150,17 +150,17 @@
       "connections": 5,
       "population": 247139,
       "type": "medium",
-      "insee": "85304"
+      "code": "051"
     },
     {
       "id": "006",
       "name": "Bordeaux",
       "x": -0.574,
       "y": 44.857,
-      "connections": 8,
+      "connections": 9,
       "population": 1393764,
       "type": "major",
-      "insee": "40200"
+      "code": "006"
     },
     {
       "id": "028",
@@ -170,7 +170,7 @@
       "connections": 7,
       "population": 414799,
       "type": "medium",
-      "insee": "70406"
+      "code": "028"
     },
     {
       "id": "013",
@@ -180,7 +180,7 @@
       "connections": 7,
       "population": 771320,
       "type": "major",
-      "insee": "35363"
+      "code": "013"
     },
     {
       "id": "041",
@@ -190,7 +190,7 @@
       "connections": 5,
       "population": 322810,
       "type": "medium",
-      "insee": "87205"
+      "code": "041"
     },
     {
       "id": "045",
@@ -200,7 +200,7 @@
       "connections": 3,
       "population": 282948,
       "type": "medium",
-      "insee": "70578"
+      "code": "045"
     },
     {
       "id": "039",
@@ -210,7 +210,7 @@
       "connections": 2,
       "population": 334482,
       "type": "medium",
-      "insee": "76747"
+      "code": "039"
     },
     {
       "id": "015",
@@ -220,17 +220,17 @@
       "connections": 4,
       "population": 708816,
       "type": "major",
-      "insee": "76759"
+      "code": "015"
     },
     {
       "id": "025",
       "name": "Orléans",
       "x": 1.916,
       "y": 47.883,
-      "connections": 3,
+      "connections": 5,
       "population": 456452,
       "type": "medium",
-      "insee": "45346"
+      "code": "025"
     },
     {
       "id": "052",
@@ -240,7 +240,7 @@
       "connections": 2,
       "population": 239789,
       "type": "medium",
-      "insee": "29298"
+      "code": "052"
     },
     {
       "id": "032",
@@ -250,7 +250,7 @@
       "connections": 3,
       "population": 375744,
       "type": "medium",
-      "insee": "29299"
+      "code": "032"
     },
     {
       "id": "053",
@@ -260,7 +260,7 @@
       "connections": 4,
       "population": 229039,
       "type": "medium",
-      "insee": "56220"
+      "code": "053"
     },
     {
       "id": "037",
@@ -270,7 +270,7 @@
       "connections": 7,
       "population": 350007,
       "type": "medium",
-      "insee": "30356"
+      "code": "037"
     },
     {
       "id": "012",
@@ -280,7 +280,7 @@
       "connections": 3,
       "population": 823120,
       "type": "major",
-      "insee": "34344"
+      "code": "012"
     },
     {
       "id": "019",
@@ -290,7 +290,7 @@
       "connections": 8,
       "population": 522597,
       "type": "major",
-      "insee": "37281"
+      "code": "019"
     },
     {
       "id": "014",
@@ -300,7 +300,7 @@
       "connections": 4,
       "population": 722904,
       "type": "major",
-      "insee": "38567"
+      "code": "014"
     },
     {
       "id": "047",
@@ -310,7 +310,7 @@
       "connections": 3,
       "population": 283664,
       "type": "medium",
-      "insee": "64558"
+      "code": "047"
     },
     {
       "id": "023",
@@ -320,7 +320,7 @@
       "connections": 1,
       "population": 500562,
       "type": "major",
-      "insee": "43265"
+      "code": "023"
     },
     {
       "id": "008",
@@ -330,7 +330,7 @@
       "connections": 5,
       "population": 1031953,
       "type": "major",
-      "insee": "85262"
+      "code": "008"
     },
     {
       "id": "026",
@@ -340,7 +340,7 @@
       "connections": 5,
       "population": 440844,
       "type": "medium",
-      "insee": "49377"
+      "code": "026"
     },
     {
       "id": "020",
@@ -350,7 +350,7 @@
       "connections": 5,
       "population": 508793,
       "type": "major",
-      "insee": "88529"
+      "code": "020"
     },
     {
       "id": "LUX",
@@ -360,7 +360,7 @@
       "connections": 1,
       "population": 308550,
       "type": "medium",
-      "insee": "57767"
+      "code": "LUX"
     },
     {
       "id": "033",
@@ -370,7 +370,7 @@
       "connections": 5,
       "population": 375059,
       "type": "medium",
-      "insee": "57755"
+      "code": "033"
     },
     {
       "id": "010",
@@ -380,7 +380,7 @@
       "connections": 5,
       "population": 864993,
       "type": "major",
-      "insee": "88501"
+      "code": "010"
     },
     {
       "id": "004",
@@ -390,7 +390,7 @@
       "connections": 5,
       "population": 1521660,
       "type": "major",
-      "insee": "62907"
+      "code": "004"
     },
     {
       "id": "038",
@@ -400,7 +400,7 @@
       "connections": 3,
       "population": 337269,
       "type": "medium",
-      "insee": "59651"
+      "code": "038"
     },
     {
       "id": "048",
@@ -410,7 +410,7 @@
       "connections": 2,
       "population": 258733,
       "type": "medium",
-      "insee": "62852"
+      "code": "048"
     },
     {
       "id": "035",
@@ -420,7 +420,7 @@
       "connections": 3,
       "population": 352877,
       "type": "medium",
-      "insee": "80835"
+      "code": "035"
     },
     {
       "id": "042",
@@ -430,7 +430,7 @@
       "connections": 4,
       "population": 321298,
       "type": "medium",
-      "insee": "62895"
+      "code": "042"
     },
     {
       "id": "022",
@@ -440,7 +440,7 @@
       "connections": 4,
       "population": 508354,
       "type": "major",
-      "insee": "63473"
+      "code": "022"
     },
     {
       "id": "044",
@@ -450,7 +450,7 @@
       "connections": 3,
       "population": 282738,
       "type": "medium",
-      "insee": "65476"
+      "code": "044"
     },
     {
       "id": "030",
@@ -460,7 +460,7 @@
       "connections": 2,
       "population": 422786,
       "type": "medium",
-      "insee": "66233"
+      "code": "030"
     },
     {
       "id": "029",
@@ -470,7 +470,7 @@
       "connections": 5,
       "population": 408968,
       "type": "medium",
-      "insee": "90058"
+      "code": "029"
     },
     {
       "id": "034",
@@ -480,7 +480,7 @@
       "connections": 5,
       "population": 367437,
       "type": "medium",
-      "insee": "72386"
+      "code": "034"
     },
     {
       "id": "043",
@@ -490,7 +490,7 @@
       "connections": 2,
       "population": 298164,
       "type": "medium",
-      "insee": "74310"
+      "code": "043"
     },
     {
       "id": "018",
@@ -500,7 +500,7 @@
       "connections": 5,
       "population": 581948,
       "type": "major",
-      "insee": "83153"
+      "code": "018"
     },
     {
       "id": "046",
@@ -510,17 +510,19 @@
       "connections": 5,
       "population": 281789,
       "type": "medium",
-      "insee": "86300"
+      "code": "046"
     }
   ],
   "edges": [
     {
       "source": "002",
       "target": "028",
-      "distance": 150.7079241487272,
+      "distance": 178.20523723265083,
       "duration": 84.0,
       "trips": 608,
       "route_type": "intercity",
+      "trip_id": "OCESN2218F4543944:2025-08-08T22:55:08Z",
+      "departure_time": "2025-11-01T07:35:00Z",
       "train_types": {
         "TER": 327,
         "TGV": 267,
@@ -531,10 +533,12 @@
     {
       "source": "002",
       "target": "019",
-      "distance": 337.0926608434153,
+      "distance": 339.0963354933247,
       "duration": 288.0,
       "trips": 86,
       "route_type": "high_speed",
+      "trip_id": "OCESN16840F4536908:2025-06-17T23:52:01Z",
+      "departure_time": "2025-11-02T11:02:00Z",
       "train_types": {
         "TER": 27,
         "INTERCITES": 59
@@ -546,21 +550,25 @@
       "target": "014",
       "distance": 55.603331664410774,
       "duration": 54.0,
-      "trips": 285,
+      "trips": 288,
       "route_type": "regional",
+      "trip_id": "OCESN17624F5183514:2025-08-10T22:39:17Z",
+      "departure_time": "2025-08-14T12:21:00Z",
       "train_types": {
         "TER": 236,
-        "TGV": 49
+        "TGV": 52
       },
       "dominant_train_type": "TER"
     },
     {
       "source": "002",
       "target": "049",
-      "distance": 58.87096409390587,
+      "distance": 81.43205141360443,
       "duration": 23.0,
       "trips": 956,
       "route_type": "regional",
+      "trip_id": "OCESN6193F4532248:2025-06-17T23:52:01Z",
+      "departure_time": "2025-09-29T12:14:00Z",
       "train_types": {
         "TER": 370,
         "TGV": 586
@@ -574,6 +582,8 @@
       "duration": 42.0,
       "trips": 303,
       "route_type": "regional",
+      "trip_id": "OCESN883503F5172494:2025-08-06T22:45:16Z",
+      "departure_time": "2025-08-12T04:20:00Z",
       "train_types": {
         "TER": 303
       },
@@ -582,10 +592,12 @@
     {
       "source": "002",
       "target": "045",
-      "distance": 157.75778827358508,
+      "distance": 191.25770410420623,
       "duration": 117.0,
       "trips": 76,
       "route_type": "intercity",
+      "trip_id": "OCESN2083F4537184:2025-07-29T22:51:48Z",
+      "departure_time": "2025-08-19T08:04:00Z",
       "train_types": {
         "TGV": 18,
         "TER": 40,
@@ -600,6 +612,8 @@
       "duration": 50.0,
       "trips": 414,
       "route_type": "intercity",
+      "trip_id": "OCESN6114F5138230:2025-08-10T22:39:17Z",
+      "departure_time": "2025-11-23T11:32:00Z",
       "train_types": {
         "TGV": 397,
         "ICE": 17
@@ -609,10 +623,12 @@
     {
       "source": "002",
       "target": "001",
-      "distance": 379.4967110475336,
+      "distance": 390.436085822433,
       "duration": 103.0,
       "trips": 1079,
       "route_type": "high_speed",
+      "trip_id": "OCESN7842F4530647:2025-06-17T23:52:01Z",
+      "departure_time": "2025-08-18T09:34:00Z",
       "train_types": {
         "TGV": 1079
       },
@@ -625,6 +641,8 @@
       "duration": 56.0,
       "trips": 45,
       "route_type": "intercity",
+      "trip_id": "OCESN7882F4626737:2025-06-23T02:35:07Z",
+      "departure_time": "2025-09-07T16:13:00Z",
       "train_types": {
         "TGV": 45
       },
@@ -635,11 +653,13 @@
       "target": "023",
       "distance": 18.473686279541383,
       "duration": 14.0,
-      "trips": 762,
+      "trips": 764,
       "route_type": "regional",
+      "trip_id": "OCESN886825F5182135:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-14T10:49:00Z",
       "train_types": {
         "TGV": 62,
-        "TER": 700
+        "TER": 702
       },
       "dominant_train_type": "TER"
     },
@@ -650,6 +670,8 @@
       "duration": 63.0,
       "trips": 17,
       "route_type": "regional",
+      "trip_id": "OCESN7897F5238450:2025-08-09T22:41:15Z",
+      "departure_time": "2025-08-15T11:06:00Z",
       "train_types": {
         "UNKNOWN": 17
       },
@@ -658,10 +680,12 @@
     {
       "source": "002",
       "target": "022",
-      "distance": 133.079843648063,
+      "distance": 136.43590338046315,
       "duration": 136.0,
       "trips": 61,
       "route_type": "regional",
+      "trip_id": "OCESN875702F5258099:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-12T05:02:00Z",
       "train_types": {
         "TER": 61
       },
@@ -670,10 +694,12 @@
     {
       "source": "GEN",
       "target": "043",
-      "distance": 20.002950675041486,
+      "distance": 23.160539705179435,
       "duration": 32.0,
       "trips": 65,
       "route_type": "regional",
+      "trip_id": "OCESN23443F5125535:2025-08-02T23:13:12Z",
+      "departure_time": "2025-10-25T19:37:00Z",
       "train_types": {
         "TER": 65
       },
@@ -686,6 +712,8 @@
       "duration": 198.0,
       "trips": 16,
       "route_type": "regional",
+      "trip_id": "OCESN6473F4328652:2025-05-28T00:14:01Z",
+      "departure_time": "2025-08-16T09:04:00Z",
       "train_types": {
         "TGV": 16
       },
@@ -698,6 +726,8 @@
       "duration": 15.0,
       "trips": 372,
       "route_type": "regional",
+      "trip_id": "OCESN883701F5247967:2025-08-10T22:39:17Z",
+      "departure_time": "2025-08-25T03:57:00Z",
       "train_types": {
         "TER": 372
       },
@@ -708,21 +738,25 @@
       "target": "043",
       "distance": 11.286005676315503,
       "duration": 9.0,
-      "trips": 350,
+      "trips": 353,
       "route_type": "regional",
+      "trip_id": "OCESN17974F5169814:2025-08-10T22:39:17Z",
+      "departure_time": "2025-08-13T08:26:00Z",
       "train_types": {
         "TER": 277,
-        "TGV": 73
+        "TGV": 76
       },
       "dominant_train_type": "TER"
     },
     {
       "source": "050",
       "target": "001",
-      "distance": 440.79936777102154,
+      "distance": 451.8373264464668,
       "duration": 168.0,
       "trips": 139,
       "route_type": "high_speed",
+      "trip_id": "OCESN6937F4967844:2025-07-19T23:07:05Z",
+      "departure_time": "2025-08-16T07:46:00Z",
       "train_types": {
         "TGV": 139
       },
@@ -735,6 +769,8 @@
       "duration": 29.0,
       "trips": 437,
       "route_type": "regional",
+      "trip_id": "OCESN2098F5240047:2025-08-09T22:41:15Z",
+      "departure_time": "2025-08-16T08:30:00Z",
       "train_types": {
         "TGV": 433,
         "ICE": 4
@@ -748,6 +784,8 @@
       "duration": 68.0,
       "trips": 27,
       "route_type": "intercity",
+      "trip_id": "OCESN2454F4534759:2025-07-04T23:11:59Z",
+      "departure_time": "2025-09-01T16:23:00Z",
       "train_types": {
         "TGV": 27
       },
@@ -756,10 +794,12 @@
     {
       "source": "036",
       "target": "033",
-      "distance": 159.123355459865,
+      "distance": 161.1797526399762,
       "duration": 37.0,
       "trips": 250,
       "route_type": "intercity",
+      "trip_id": "OCESN5464F5250130:2025-08-10T22:39:17Z",
+      "departure_time": "2025-08-15T09:55:00Z",
       "train_types": {
         "TGV": 248,
         "ICE": 2
@@ -769,10 +809,12 @@
     {
       "source": "036",
       "target": "020",
-      "distance": 144.24192201264194,
+      "distance": 169.54365799861068,
       "duration": 52.0,
       "trips": 67,
-      "route_type": "regional",
+      "route_type": "intercity",
+      "trip_id": "OCESN2580F4686935:2025-07-04T23:11:59Z",
+      "departure_time": "2025-09-01T12:11:00Z",
       "train_types": {
         "TGV": 60,
         "TER": 7
@@ -782,10 +824,12 @@
     {
       "source": "036",
       "target": "028",
-      "distance": 207.7764781884085,
+      "distance": 209.90265195321922,
       "duration": 193.0,
       "trips": 9,
       "route_type": "regional",
+      "trip_id": "OCESN839863F4971711:2025-08-08T22:55:08Z",
+      "departure_time": "2025-11-17T12:35:00Z",
       "train_types": {
         "TER": 9
       },
@@ -798,6 +842,8 @@
       "duration": 18.0,
       "trips": 482,
       "route_type": "regional",
+      "trip_id": "OCESN848533F5096595:2025-08-08T22:55:08Z",
+      "departure_time": "2025-11-16T21:05:00Z",
       "train_types": {
         "TER": 482
       },
@@ -808,10 +854,12 @@
       "target": "006",
       "distance": 483.75346453703355,
       "duration": 116.0,
-      "trips": 595,
+      "trips": 604,
       "route_type": "high_speed",
+      "trip_id": "OCESN12278F4535930:2025-07-11T23:16:08Z",
+      "departure_time": "2025-09-01T16:46:00Z",
       "train_types": {
-        "TGV": 595
+        "TGV": 604
       },
       "dominant_train_type": "TGV"
     },
@@ -820,10 +868,12 @@
       "target": "019",
       "distance": 187.7423421518992,
       "duration": 50.0,
-      "trips": 479,
+      "trips": 493,
       "route_type": "intercity",
+      "trip_id": "OCESN5300F4542121:2025-06-18T23:50:29Z",
+      "departure_time": "2025-11-04T05:28:00Z",
       "train_types": {
-        "TGV": 475,
+        "TGV": 489,
         "ICE": 4
       },
       "dominant_train_type": "TGV"
@@ -833,10 +883,12 @@
       "target": "046",
       "distance": 278.6663442457482,
       "duration": 71.0,
-      "trips": 174,
+      "trips": 175,
       "route_type": "intercity",
+      "trip_id": "OCESN5440F4542289:2025-06-17T23:52:01Z",
+      "departure_time": "2025-12-07T09:36:00Z",
       "train_types": {
-        "TGV": 174
+        "TGV": 175
       },
       "dominant_train_type": "TGV"
     },
@@ -847,6 +899,8 @@
       "duration": 19.0,
       "trips": 495,
       "route_type": "regional",
+      "trip_id": "OCESN13104F4535914:2025-06-17T23:52:01Z",
+      "departure_time": "2025-11-15T05:16:00Z",
       "train_types": {
         "TER": 469,
         "TGV": 26
@@ -856,10 +910,12 @@
     {
       "source": "001",
       "target": "004",
-      "distance": 158.57993179490174,
+      "distance": 185.46099019280896,
       "duration": 51.0,
       "trips": 1194,
       "route_type": "intercity",
+      "trip_id": "OCESN5000F5250150:2025-08-10T22:39:17Z",
+      "departure_time": "2025-08-14T05:52:00Z",
       "train_types": {
         "TER": 25,
         "TGV": 1169
@@ -869,10 +925,12 @@
     {
       "source": "001",
       "target": "028",
-      "distance": 180.05676377740463,
+      "distance": 259.74865364242294,
       "duration": 93.0,
       "trips": 403,
       "route_type": "intercity",
+      "trip_id": "OCESN9277F5159953:2025-08-04T22:46:43Z",
+      "departure_time": "2025-09-06T15:56:00Z",
       "train_types": {
         "TER": 315,
         "TGV": 88
@@ -886,6 +944,8 @@
       "duration": 92.0,
       "trips": 260,
       "route_type": "high_speed",
+      "trip_id": "OCESN2096F4537217:2025-06-17T23:52:01Z",
+      "departure_time": "2025-10-18T17:56:00Z",
       "train_types": {
         "TGV": 203,
         "TER": 2,
@@ -896,10 +956,12 @@
     {
       "source": "001",
       "target": "033",
-      "distance": 249.08319248410567,
+      "distance": 278.61211100953295,
       "duration": 73.0,
       "trips": 176,
       "route_type": "intercity",
+      "trip_id": "OCESN2350F4534916:2025-08-08T22:55:08Z",
+      "departure_time": "2025-08-14T05:37:00Z",
       "train_types": {
         "TGV": 176
       },
@@ -908,10 +970,12 @@
     {
       "source": "001",
       "target": "020",
-      "distance": 258.9921690001871,
+      "distance": 280.3408124236981,
       "duration": 88.0,
       "trips": 133,
       "route_type": "intercity",
+      "trip_id": "OCESN2546F4616191:2025-07-04T23:11:59Z",
+      "departure_time": "2025-09-05T13:10:00Z",
       "train_types": {
         "TGV": 97,
         "TER": 36
@@ -921,10 +985,12 @@
     {
       "source": "001",
       "target": "034",
-      "distance": 122.5608917295386,
+      "distance": 173.0530950602649,
       "duration": 47.0,
       "trips": 706,
-      "route_type": "regional",
+      "route_type": "intercity",
+      "trip_id": "OCESN5351F4542194:2025-06-17T23:52:01Z",
+      "departure_time": "2025-09-15T06:42:00Z",
       "train_types": {
         "TGV": 596,
         "TER": 110
@@ -938,6 +1004,8 @@
       "duration": 130.0,
       "trips": 13,
       "route_type": "regional",
+      "trip_id": "OCESN3161F4534067:2025-08-09T22:41:15Z",
+      "departure_time": "2025-11-08T05:57:00Z",
       "train_types": {
         "TER": 13
       },
@@ -948,20 +1016,24 @@
       "target": "024",
       "distance": 150.79839793228612,
       "duration": 85.0,
-      "trips": 105,
+      "trips": 106,
       "route_type": "intercity",
+      "trip_id": "OCESN3316F4533912:2025-06-17T23:52:01Z",
+      "departure_time": "2025-11-12T14:56:00Z",
       "train_types": {
-        "TER": 105
+        "TER": 106
       },
       "dominant_train_type": "TER"
     },
     {
       "source": "001",
       "target": "041",
-      "distance": 344.32348292941737,
+      "distance": 344.3278530371857,
       "duration": 197.0,
       "trips": 161,
       "route_type": "high_speed",
+      "trip_id": "OCESN3634F4678317:2025-06-26T23:56:59Z",
+      "departure_time": "2025-09-26T06:13:00Z",
       "train_types": {
         "INTERCITES": 161
       },
@@ -972,11 +1044,13 @@
       "target": "025",
       "distance": 39.09244971193919,
       "duration": 41.0,
-      "trips": 734,
+      "trips": 795,
       "route_type": "regional",
+      "trip_id": "OCESN860590F4548961:2025-06-17T23:52:01Z",
+      "departure_time": "2025-08-18T15:33:00Z",
       "train_types": {
-        "INTERCITES": 170,
-        "TER": 564
+        "INTERCITES": 212,
+        "TER": 583
       },
       "dominant_train_type": "TER"
     },
@@ -985,20 +1059,54 @@
       "target": "026",
       "distance": 251.89491251717297,
       "duration": 75.0,
-      "trips": 127,
+      "trips": 132,
       "route_type": "intercity",
+      "trip_id": "OCESN5358F4542204:2025-06-17T23:52:01Z",
+      "departure_time": "2025-12-06T19:41:00Z",
       "train_types": {
-        "TGV": 127
+        "TGV": 132
       },
       "dominant_train_type": "TGV"
     },
     {
       "source": "001",
+      "target": "037",
+      "distance": 577.9280283255351,
+      "duration": 180.0,
+      "trips": 31,
+      "route_type": "high_speed",
+      "trip_id": "OCESN6039F5207946:2025-08-07T22:44:50Z",
+      "departure_time": "2025-08-15T08:42:00Z",
+      "train_types": {
+        "INTERCITES": 28,
+        "TGV": 3
+      },
+      "dominant_train_type": "INTERCITES"
+    },
+    {
+      "source": "001",
+      "target": "003",
+      "distance": 640.6528265134061,
+      "duration": 175.0,
+      "trips": 136,
+      "route_type": "high_speed",
+      "trip_id": "OCESN6181F5249801:2025-08-10T22:39:17Z",
+      "departure_time": "2025-08-12T15:22:00Z",
+      "train_types": {
+        "INTERCITES": 79,
+        "TGV": 57
+      },
+      "dominant_train_type": "INTERCITES"
+    },
+    {
+      "source": "001",
       "target": "022",
-      "distance": 332.6103115990524,
+      "distance": 344.5579049546894,
       "duration": 193.0,
       "trips": 378,
       "route_type": "high_speed",
+      "trip_id": "OCESN5977F3996559:2025-06-17T23:52:01Z",
+      "departure_time": "2025-09-01T15:57:00Z",
       "train_types": {
         "INTERCITES": 378
       },
@@ -1009,10 +1117,12 @@
       "target": "040",
       "distance": 577.7684780162418,
       "duration": 156.0,
-      "trips": 226,
+      "trips": 240,
       "route_type": "high_speed",
+      "trip_id": "OCESN6185F3890310:2025-08-10T22:39:17Z",
+      "departure_time": "2025-08-15T12:56:00Z",
       "train_types": {
-        "TGV": 226
+        "TGV": 240
       },
       "dominant_train_type": "TGV"
     },
@@ -1023,32 +1133,10 @@
       "duration": 129.0,
       "trips": 270,
       "route_type": "high_speed",
+      "trip_id": "OCESN6038F4532456:2025-06-17T23:52:01Z",
+      "departure_time": "2025-10-18T19:10:00Z",
       "train_types": {
         "TGV": 270
-      },
-      "dominant_train_type": "TGV"
-    },
-    {
-      "source": "001",
-      "target": "037",
-      "distance": 577.9280283255351,
-      "duration": 180.0,
-      "trips": 3,
-      "route_type": "regional",
-      "train_types": {
-        "TGV": 3
-      },
-      "dominant_train_type": "TGV"
-    },
-    {
-      "source": "001",
-      "target": "003",
-      "distance": 640.6528265134061,
-      "duration": 175.0,
-      "trips": 66,
-      "route_type": "high_speed",
-      "train_types": {
-        "TGV": 66
       },
       "dominant_train_type": "TGV"
     },
@@ -1059,6 +1147,8 @@
       "duration": 228.0,
       "trips": 1,
       "route_type": "regional",
+      "trip_id": "OCESN6161F5249823:2025-08-10T22:39:17Z",
+      "departure_time": "2025-08-12T05:48:00Z",
       "train_types": {
         "TGV": 1
       },
@@ -1071,6 +1161,8 @@
       "duration": 222.0,
       "trips": 2,
       "route_type": "regional",
+      "trip_id": "OCESN6311F4532149:2025-06-17T23:52:01Z",
+      "departure_time": "2025-09-15T08:13:00Z",
       "train_types": {
         "TGV": 2
       },
@@ -1083,6 +1175,8 @@
       "duration": 100.0,
       "trips": 72,
       "route_type": "intercity",
+      "trip_id": "OCESN7159F4993362:2025-07-21T23:28:59Z",
+      "departure_time": "2025-09-20T06:54:00Z",
       "train_types": {
         "TGV": 72
       },
@@ -1095,6 +1189,8 @@
       "duration": 63.0,
       "trips": 64,
       "route_type": "intercity",
+      "trip_id": "OCESN7173F3910400:2025-07-16T23:17:51Z",
+      "departure_time": "2025-09-01T12:29:00Z",
       "train_types": {
         "TGV": 64
       },
@@ -1105,10 +1201,12 @@
       "target": "013",
       "distance": 305.55550884487025,
       "duration": 85.0,
-      "trips": 393,
+      "trips": 396,
       "route_type": "high_speed",
+      "trip_id": "OCESN8009F4703027:2025-06-28T23:46:52Z",
+      "departure_time": "2025-09-05T08:00:00Z",
       "train_types": {
-        "TGV": 393
+        "TGV": 396
       },
       "dominant_train_type": "TGV"
     },
@@ -1117,10 +1215,12 @@
       "target": "008",
       "distance": 339.19534010490827,
       "duration": 117.0,
-      "trips": 31,
+      "trips": 32,
       "route_type": "high_speed",
+      "trip_id": "OCESN8807F4775772:2025-07-04T23:11:59Z",
+      "departure_time": "2025-08-29T10:23:00Z",
       "train_types": {
-        "TGV": 31
+        "TGV": 32
       },
       "dominant_train_type": "TGV"
     },
@@ -1131,6 +1231,8 @@
       "duration": 163.0,
       "trips": 25,
       "route_type": "intercity",
+      "trip_id": "OCESN8747F5237464:2025-08-09T22:41:15Z",
+      "departure_time": "2025-08-14T17:15:00Z",
       "train_types": {
         "TGV": 25
       },
@@ -1143,6 +1245,8 @@
       "duration": 148.0,
       "trips": 18,
       "route_type": "regional",
+      "trip_id": "OCESN8360F4526527:2025-08-09T22:41:15Z",
+      "departure_time": "2025-09-01T05:06:00Z",
       "train_types": {
         "TGV": 18
       },
@@ -1155,6 +1259,8 @@
       "duration": 44.0,
       "trips": 212,
       "route_type": "regional",
+      "trip_id": "OCESN839402F4722854:2025-08-11T22:41:47Z",
+      "departure_time": "2025-11-10T05:13:00Z",
       "train_types": {
         "TER": 212
       },
@@ -1163,10 +1269,12 @@
     {
       "source": "001",
       "target": "029",
-      "distance": 387.0711388766309,
+      "distance": 387.45795303839856,
       "duration": 158.0,
       "trips": 89,
       "route_type": "high_speed",
+      "trip_id": "OCESN9215F4558164:2025-06-17T23:52:01Z",
+      "departure_time": "2025-11-16T13:21:00Z",
       "train_types": {
         "TER": 89
       },
@@ -1179,6 +1287,8 @@
       "duration": 234.0,
       "trips": 1,
       "route_type": "regional",
+      "trip_id": "OCESN8535F4545193:2025-08-09T22:41:15Z",
+      "departure_time": "2025-08-15T07:22:00Z",
       "train_types": {
         "TGV": 1
       },
@@ -1189,24 +1299,28 @@
       "target": "032",
       "distance": 502.3190031282547,
       "duration": 198.0,
-      "trips": 8,
+      "trips": 10,
       "route_type": "regional",
+      "trip_id": "OCESN8645F5245673:2025-08-09T22:41:15Z",
+      "departure_time": "2025-08-14T17:00:00Z",
       "train_types": {
-        "TGV": 8
+        "TGV": 10
       },
       "dominant_train_type": "TGV"
     },
     {
       "source": "017",
       "target": "031",
-      "distance": 12.500810808355899,
+      "distance": 17.44720313315234,
       "duration": 13.0,
-      "trips": 756,
+      "trips": 823,
       "route_type": "regional",
+      "trip_id": "OCESN6162F5249822:2025-08-10T22:39:17Z",
+      "departure_time": "2025-08-12T12:02:00Z",
       "train_types": {
-        "TER": 533,
-        "TGV": 196,
-        "INTERCITES": 27
+        "TER": 550,
+        "TGV": 203,
+        "INTERCITES": 70
       },
       "dominant_train_type": "TER"
     },
@@ -1215,11 +1329,13 @@
       "target": "018",
       "distance": 100.0668515801331,
       "duration": 71.0,
-      "trips": 244,
+      "trips": 294,
       "route_type": "regional",
+      "trip_id": "OCESN6173F4532319:2025-08-10T22:39:17Z",
+      "departure_time": "2025-09-15T11:16:00Z",
       "train_types": {
-        "TGV": 217,
-        "INTERCITES": 27
+        "TGV": 224,
+        "INTERCITES": 70
       },
       "dominant_train_type": "TGV"
     },
@@ -1230,6 +1346,8 @@
       "duration": 49.0,
       "trips": 209,
       "route_type": "regional",
+      "trip_id": "OCESN885100F5198680:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-12T03:24:00Z",
       "train_types": {
         "TER": 209
       },
@@ -1238,10 +1356,12 @@
     {
       "source": "049",
       "target": "040",
-      "distance": 90.3610987582407,
+      "distance": 119.95194742752456,
       "duration": 31.0,
       "trips": 572,
       "route_type": "regional",
+      "trip_id": "OCESN5010F4541650:2025-06-26T23:56:59Z",
+      "departure_time": "2025-11-11T10:21:00Z",
       "train_types": {
         "TER": 336,
         "TGV": 236
@@ -1255,6 +1375,8 @@
       "duration": 36.0,
       "trips": 610,
       "route_type": "regional",
+      "trip_id": "OCESN6254F3890256:2025-03-05T23:53:13Z",
+      "departure_time": "2025-08-15T08:00:00Z",
       "train_types": {
         "TGV": 610
       },
@@ -1267,6 +1389,8 @@
       "duration": 101.0,
       "trips": 5,
       "route_type": "regional",
+      "trip_id": "OCESN7853F4530635:2025-06-18T23:50:29Z",
+      "departure_time": "2025-10-11T16:29:00Z",
       "train_types": {
         "UNKNOWN": 5
       },
@@ -1277,10 +1401,12 @@
       "target": "006",
       "distance": 209.53108905717872,
       "duration": 140.0,
-      "trips": 328,
+      "trips": 332,
       "route_type": "intercity",
+      "trip_id": "OCESN8508F4226546:2025-06-15T23:48:46Z",
+      "departure_time": "2025-09-01T08:20:00Z",
       "train_types": {
-        "TGV": 120,
+        "TGV": 124,
         "INTERCITES": 208
       },
       "dominant_train_type": "INTERCITES"
@@ -1292,6 +1418,8 @@
       "duration": 115.0,
       "trips": 96,
       "route_type": "regional",
+      "trip_id": "OCESN872730F5124665:2025-08-11T22:41:47Z",
+      "departure_time": "2025-09-01T03:55:00Z",
       "train_types": {
         "INTERCITES": 59,
         "TER": 37
@@ -1305,6 +1433,8 @@
       "duration": 211.0,
       "trips": 93,
       "route_type": "intercity",
+      "trip_id": "OCESN3619F4533414:2025-07-16T23:17:51Z",
+      "departure_time": "2025-11-11T11:01:00Z",
       "train_types": {
         "INTERCITES": 93
       },
@@ -1312,11 +1442,27 @@
     },
     {
       "source": "005",
+      "target": "025",
+      "distance": 481.15445957911953,
+      "duration": 443.0,
+      "trips": 65,
+      "route_type": "high_speed",
+      "trip_id": "OCESN3750F4537802:2025-06-17T23:52:01Z",
+      "departure_time": "2025-11-07T21:25:00Z",
+      "train_types": {
+        "INTERCITES": 65
+      },
+      "dominant_train_type": "INTERCITES"
+    },
+    {
+      "source": "005",
       "target": "012",
-      "distance": 170.99913787160693,
+      "distance": 195.40546890384778,
       "duration": 128.0,
       "trips": 310,
       "route_type": "intercity",
+      "trip_id": "OCESN6821F4359981:2025-06-17T23:52:01Z",
+      "departure_time": "2025-11-29T07:44:00Z",
       "train_types": {
         "INTERCITES": 201,
         "TGV": 75,
@@ -1331,6 +1477,8 @@
       "duration": 115.0,
       "trips": 128,
       "route_type": "regional",
+      "trip_id": "OCESN86974F4551764:2025-08-04T22:46:43Z",
+      "departure_time": "2025-11-08T15:07:00Z",
       "train_types": {
         "TER": 128
       },
@@ -1343,6 +1491,8 @@
       "duration": 314.0,
       "trips": 14,
       "route_type": "regional",
+      "trip_id": "OCESN871209F3919677:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-15T08:38:00Z",
       "train_types": {
         "TER": 14
       },
@@ -1355,6 +1505,8 @@
       "duration": 168.0,
       "trips": 59,
       "route_type": "intercity",
+      "trip_id": "OCESN839559F4222118:2025-08-11T22:41:47Z",
+      "departure_time": "2025-10-24T18:17:00Z",
       "train_types": {
         "TER": 59
       },
@@ -1367,6 +1519,8 @@
       "duration": 105.0,
       "trips": 16,
       "route_type": "regional",
+      "trip_id": "OCESN839584F4525775:2025-08-10T22:39:17Z",
+      "departure_time": "2025-11-22T12:16:00Z",
       "train_types": {
         "TER": 16
       },
@@ -1375,13 +1529,15 @@
     {
       "source": "003",
       "target": "040",
-      "distance": 60.16464886658231,
+      "distance": 67.22109215261676,
       "duration": 19.0,
-      "trips": 1084,
+      "trips": 1094,
       "route_type": "regional",
+      "trip_id": "OCESN2080F4537171:2025-06-24T00:10:55Z",
+      "departure_time": "2025-10-10T19:12:00Z",
       "train_types": {
-        "TER": 292,
-        "TGV": 775,
+        "TER": 295,
+        "TGV": 782,
         "ICE": 17
       },
       "dominant_train_type": "TGV"
@@ -1391,22 +1547,26 @@
       "target": "018",
       "distance": 19.370454418659676,
       "duration": 20.0,
-      "trips": 438,
+      "trips": 482,
       "route_type": "regional",
+      "trip_id": "OCESN881402F5221391:2025-08-10T22:39:17Z",
+      "departure_time": "2025-08-12T03:30:00Z",
       "train_types": {
         "TGV": 242,
-        "INTERCITES": 27,
-        "TER": 169
+        "INTERCITES": 70,
+        "TER": 170
       },
       "dominant_train_type": "TGV"
     },
     {
       "source": "003",
       "target": "037",
-      "distance": 86.17892422548287,
+      "distance": 100.74462681559748,
       "duration": 66.0,
       "trips": 234,
       "route_type": "regional",
+      "trip_id": "OCESN4758F4541545:2025-08-02T23:13:12Z",
+      "departure_time": "2025-09-08T07:23:00Z",
       "train_types": {
         "INTERCITES": 176,
         "TER": 58
@@ -1420,6 +1580,8 @@
       "duration": 63.0,
       "trips": 58,
       "route_type": "regional",
+      "trip_id": "OCESN6184F5249799:2025-08-10T22:39:17Z",
+      "departure_time": "2025-08-15T09:01:00Z",
       "train_types": {
         "TGV": 58
       },
@@ -1432,6 +1594,8 @@
       "duration": 22.0,
       "trips": 83,
       "route_type": "regional",
+      "trip_id": "OCESN86987F4282586:2025-08-11T22:41:47Z",
+      "departure_time": "2025-11-16T12:35:00Z",
       "train_types": {
         "TER": 83
       },
@@ -1444,6 +1608,8 @@
       "duration": 86.0,
       "trips": 69,
       "route_type": "regional",
+      "trip_id": "OCESN857122F5264092:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-15T15:47:00Z",
       "train_types": {
         "TER": 69
       },
@@ -1456,6 +1622,8 @@
       "duration": 71.0,
       "trips": 119,
       "route_type": "regional",
+      "trip_id": "OCESN852056F4544919:2025-08-11T22:41:47Z",
+      "departure_time": "2025-11-15T11:32:00Z",
       "train_types": {
         "TER": 119
       },
@@ -1464,10 +1632,12 @@
     {
       "source": "024",
       "target": "013",
-      "distance": 146.8298077700846,
+      "distance": 153.5348802691079,
       "duration": 197.0,
       "trips": 24,
-      "route_type": "regional",
+      "route_type": "intercity",
+      "trip_id": "OCESN852806F5254089:2025-08-10T22:39:17Z",
+      "departure_time": "2025-08-15T06:10:00Z",
       "train_types": {
         "TER": 24
       },
@@ -1480,6 +1650,8 @@
       "duration": 103.0,
       "trips": 64,
       "route_type": "regional",
+      "trip_id": "OCESN859802F4548066:2025-07-30T23:16:49Z",
+      "departure_time": "2025-09-29T04:19:00Z",
       "train_types": {
         "INTERCITES": 50,
         "TER": 14
@@ -1493,6 +1665,8 @@
       "duration": 116.0,
       "trips": 98,
       "route_type": "regional",
+      "trip_id": "OCESN864801F5174349:2025-08-05T22:47:13Z",
+      "departure_time": "2025-08-18T03:28:00Z",
       "train_types": {
         "INTERCITES": 48,
         "TER": 50
@@ -1506,6 +1680,8 @@
       "duration": 100.0,
       "trips": 21,
       "route_type": "intercity",
+      "trip_id": "OCESN5492F5259768:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-17T12:28:00Z",
       "train_types": {
         "TGV": 21
       },
@@ -1514,10 +1690,12 @@
     {
       "source": "051",
       "target": "046",
-      "distance": 95.87777436308832,
+      "distance": 101.96044216053177,
       "duration": 68.0,
       "trips": 168,
       "route_type": "regional",
+      "trip_id": "OCESN863482F5264799:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-15T14:27:00Z",
       "train_types": {
         "TGV": 122,
         "TER": 46
@@ -1529,11 +1707,13 @@
       "target": "047",
       "distance": 133.07001200842106,
       "duration": 84.0,
-      "trips": 358,
+      "trips": 379,
       "route_type": "regional",
+      "trip_id": "OCESN3740F5192082:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-15T19:01:00Z",
       "train_types": {
-        "TGV": 178,
-        "INTERCITES": 13,
+        "TGV": 181,
+        "INTERCITES": 31,
         "TER": 167
       },
       "dominant_train_type": "TGV"
@@ -1545,6 +1725,8 @@
       "duration": 79.0,
       "trips": 16,
       "route_type": "regional",
+      "trip_id": "OCESN7656F3910378:2025-06-17T23:52:01Z",
+      "departure_time": "2025-09-05T10:20:00Z",
       "train_types": {
         "TGV": 16
       },
@@ -1555,22 +1737,41 @@
       "target": "046",
       "distance": 207.15826973920986,
       "duration": 58.0,
-      "trips": 313,
+      "trips": 320,
       "route_type": "intercity",
+      "trip_id": "OCESN12269F5225775:2025-08-08T22:55:08Z",
+      "departure_time": "2025-08-12T07:20:00Z",
       "train_types": {
-        "TGV": 309,
+        "TGV": 316,
         "ICE": 4
       },
       "dominant_train_type": "TGV"
     },
     {
       "source": "006",
+      "target": "025",
+      "distance": 427.1561531782442,
+      "duration": 368.0,
+      "trips": 34,
+      "route_type": "high_speed",
+      "trip_id": "OCESN3731F4537783:2025-06-17T23:52:01Z",
+      "departure_time": "2025-10-13T20:55:00Z",
+      "train_types": {
+        "INTERCITES": 34
+      },
+      "dominant_train_type": "INTERCITES"
+    },
+    {
+      "source": "006",
       "target": "044",
       "distance": 157.0629622421254,
-      "duration": 111.0,
-      "trips": 200,
+      "duration": 106.0,
+      "trips": 203,
       "route_type": "intercity",
+      "trip_id": "OCESN3731F4883233:2025-08-06T22:45:16Z",
+      "departure_time": "2025-08-17T03:48:00Z",
       "train_types": {
+        "INTERCITES": 3,
         "TGV": 89,
         "TER": 111
       },
@@ -1579,10 +1780,12 @@
     {
       "source": "006",
       "target": "041",
-      "distance": 166.45810520962286,
+      "distance": 177.98895429045248,
       "duration": 132.0,
       "trips": 27,
       "route_type": "intercity",
+      "trip_id": "OCESN865555F5264971:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-17T07:26:00Z",
       "train_types": {
         "TER": 27
       },
@@ -1591,10 +1794,12 @@
     {
       "source": "028",
       "target": "045",
-      "distance": 49.05456828250475,
+      "distance": 69.85722070431203,
       "duration": 26.0,
       "trips": 421,
       "route_type": "regional",
+      "trip_id": "OCESN2209F4537351:2025-08-08T22:55:08Z",
+      "departure_time": "2025-10-17T12:44:00Z",
       "train_types": {
         "TGV": 351,
         "TER": 70
@@ -1608,6 +1813,8 @@
       "duration": 125.0,
       "trips": 21,
       "route_type": "intercity",
+      "trip_id": "OCESN836394F5262774:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-12T14:54:00Z",
       "train_types": {
         "INTERCITES": 14,
         "TER": 7
@@ -1621,6 +1828,8 @@
       "duration": 61.0,
       "trips": 42,
       "route_type": "intercity",
+      "trip_id": "OCESN9213F5219398:2025-08-08T22:55:08Z",
+      "departure_time": "2025-08-12T12:02:00Z",
       "train_types": {
         "UNKNOWN": 42
       },
@@ -1629,12 +1838,14 @@
     {
       "source": "013",
       "target": "034",
-      "distance": 119.39756769942157,
+      "distance": 139.17123507508583,
       "duration": 43.0,
-      "trips": 288,
+      "trips": 292,
       "route_type": "regional",
+      "trip_id": "OCESN5472F4844416:2025-07-09T23:21:34Z",
+      "departure_time": "2025-12-07T18:07:00Z",
       "train_types": {
-        "TGV": 274,
+        "TGV": 278,
         "TER": 14
       },
       "dominant_train_type": "TGV"
@@ -1646,6 +1857,8 @@
       "duration": 75.0,
       "trips": 105,
       "route_type": "regional",
+      "trip_id": "OCESN858381F4547396:2025-06-27T23:52:54Z",
+      "departure_time": "2025-10-05T15:45:00Z",
       "train_types": {
         "TER": 105
       },
@@ -1654,12 +1867,14 @@
     {
       "source": "013",
       "target": "053",
-      "distance": 115.88310734695816,
+      "distance": 131.9678452307444,
       "duration": 82.0,
-      "trips": 222,
+      "trips": 224,
       "route_type": "regional",
+      "trip_id": "OCESN8701F4596615:2025-06-21T00:16:40Z",
+      "departure_time": "2025-09-01T06:29:00Z",
       "train_types": {
-        "TGV": 126,
+        "TGV": 128,
         "TER": 96
       },
       "dominant_train_type": "TGV"
@@ -1667,12 +1882,14 @@
     {
       "source": "013",
       "target": "032",
-      "distance": 195.11500364212552,
+      "distance": 210.2714080767735,
       "duration": 116.0,
-      "trips": 251,
+      "trips": 253,
       "route_type": "intercity",
+      "trip_id": "OCESN8619F4708508:2025-07-07T23:21:26Z",
+      "departure_time": "2025-08-27T12:29:00Z",
       "train_types": {
-        "TGV": 153,
+        "TGV": 155,
         "TER": 98
       },
       "dominant_train_type": "TGV"
@@ -1684,6 +1901,8 @@
       "duration": 86.0,
       "trips": 74,
       "route_type": "regional",
+      "trip_id": "OCESN857779F4547047:2025-08-11T22:41:47Z",
+      "departure_time": "2025-10-05T17:20:00Z",
       "train_types": {
         "TER": 74
       },
@@ -1692,10 +1911,12 @@
     {
       "source": "041",
       "target": "025",
-      "distance": 196.35200173077794,
+      "distance": 237.48319597269395,
       "duration": 137.0,
       "trips": 119,
       "route_type": "intercity",
+      "trip_id": "OCESN3628F4533378:2025-06-17T23:52:01Z",
+      "departure_time": "2025-11-09T07:00:00Z",
       "train_types": {
         "INTERCITES": 113,
         "TER": 6
@@ -1709,6 +1930,8 @@
       "duration": 77.0,
       "trips": 36,
       "route_type": "regional",
+      "trip_id": "OCESN868021F4229605:2025-06-17T23:52:01Z",
+      "departure_time": "2025-10-21T13:46:00Z",
       "train_types": {
         "TER": 36
       },
@@ -1721,6 +1944,8 @@
       "duration": 44.0,
       "trips": 353,
       "route_type": "regional",
+      "trip_id": "OCESN2087F4537196:2025-07-22T23:06:23Z",
+      "departure_time": "2025-10-18T07:57:00Z",
       "train_types": {
         "TGV": 335,
         "ICE": 18
@@ -1732,10 +1957,12 @@
       "target": "015",
       "distance": 51.77791397612743,
       "duration": 32.0,
-      "trips": 235,
+      "trips": 236,
       "route_type": "regional",
+      "trip_id": "OCESN3105F5260929:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-15T08:06:00Z",
       "train_types": {
-        "TER": 209,
+        "TER": 210,
         "TGV": 26
       },
       "dominant_train_type": "TER"
@@ -1747,6 +1974,8 @@
       "duration": 52.0,
       "trips": 46,
       "route_type": "regional",
+      "trip_id": "OCESN848971F5263754:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-15T07:27:00Z",
       "train_types": {
         "TER": 46
       },
@@ -1755,12 +1984,14 @@
     {
       "source": "025",
       "target": "019",
-      "distance": 82.24540746482191,
+      "distance": 89.2046868737177,
       "duration": 42.0,
-      "trips": 376,
+      "trips": 393,
       "route_type": "regional",
+      "trip_id": "OCESN860551F4548764:2025-06-17T23:52:01Z",
+      "departure_time": "2025-09-06T06:37:00Z",
       "train_types": {
-        "TER": 376
+        "TER": 393
       },
       "dominant_train_type": "TER"
     },
@@ -1769,10 +2000,12 @@
       "target": "053",
       "distance": 41.5811907684937,
       "duration": 22.0,
-      "trips": 367,
+      "trips": 368,
       "route_type": "regional",
+      "trip_id": "OCESN8725F4553069:2025-08-08T22:55:08Z",
+      "departure_time": "2025-08-22T16:04:00Z",
       "train_types": {
-        "TGV": 138,
+        "TGV": 139,
         "TER": 229
       },
       "dominant_train_type": "TER"
@@ -1784,6 +2017,8 @@
       "duration": 48.0,
       "trips": 115,
       "route_type": "regional",
+      "trip_id": "OCESN854867F4545817:2025-06-17T23:52:01Z",
+      "departure_time": "2025-10-05T15:02:00Z",
       "train_types": {
         "TER": 115
       },
@@ -1796,6 +2031,8 @@
       "duration": 86.0,
       "trips": 74,
       "route_type": "regional",
+      "trip_id": "OCESN858250F4547304:2025-08-10T22:39:17Z",
+      "departure_time": "2025-10-05T13:44:00Z",
       "train_types": {
         "TER": 74
       },
@@ -1806,11 +2043,13 @@
       "target": "012",
       "distance": 5.286609042361387,
       "duration": 7.0,
-      "trips": 1088,
+      "trips": 1102,
       "route_type": "regional",
+      "trip_id": "OCESN877554F4554919:2025-07-24T23:06:01Z",
+      "departure_time": "2025-09-01T10:04:00Z",
       "train_types": {
         "TGV": 658,
-        "INTERCITES": 215,
+        "INTERCITES": 229,
         "TER": 215
       },
       "dominant_train_type": "TGV"
@@ -1822,6 +2061,8 @@
       "duration": 286.0,
       "trips": 29,
       "route_type": "intercity",
+      "trip_id": "OCESN877957F5205650:2025-08-08T22:55:08Z",
+      "departure_time": "2025-08-15T10:57:00Z",
       "train_types": {
         "TER": 29
       },
@@ -1830,13 +2071,15 @@
     {
       "source": "012",
       "target": "030",
-      "distance": 109.70420074930968,
+      "distance": 131.0585114670356,
       "duration": 98.0,
-      "trips": 275,
+      "trips": 291,
       "route_type": "regional",
+      "trip_id": "OCESN6037F4532467:2025-07-10T23:16:05Z",
+      "departure_time": "2025-11-09T17:19:00Z",
       "train_types": {
-        "TGV": 193,
-        "INTERCITES": 14,
+        "TGV": 195,
+        "INTERCITES": 28,
         "TER": 68
       },
       "dominant_train_type": "TGV"
@@ -1844,10 +2087,12 @@
     {
       "source": "019",
       "target": "046",
-      "distance": 55.71920752554192,
+      "distance": 94.16812170009479,
       "duration": 30.0,
       "trips": 368,
       "route_type": "regional",
+      "trip_id": "OCESN2090F4537207:2025-06-17T23:52:01Z",
+      "departure_time": "2025-08-15T17:07:00Z",
       "train_types": {
         "TGV": 336,
         "TER": 28,
@@ -1862,6 +2107,8 @@
       "duration": 37.0,
       "trips": 118,
       "route_type": "regional",
+      "trip_id": "OCESN857025F5244531:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-18T17:50:00Z",
       "train_types": {
         "TER": 118
       },
@@ -1870,10 +2117,12 @@
     {
       "source": "019",
       "target": "026",
-      "distance": 68.20945857395012,
+      "distance": 74.4392438205443,
       "duration": 43.0,
       "trips": 287,
       "route_type": "regional",
+      "trip_id": "OCESN860116F5264353:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-17T17:59:00Z",
       "train_types": {
         "TGV": 55,
         "TER": 171,
@@ -1884,12 +2133,14 @@
     {
       "source": "047",
       "target": "044",
-      "distance": 73.58819028071507,
+      "distance": 78.6697591212703,
       "duration": 59.0,
-      "trips": 105,
+      "trips": 123,
       "route_type": "regional",
+      "trip_id": "OCESN867007F4646551:2025-06-25T00:13:18Z",
+      "departure_time": "2025-11-02T08:21:00Z",
       "train_types": {
-        "INTERCITES": 72,
+        "INTERCITES": 90,
         "TER": 33
       },
       "dominant_train_type": "INTERCITES"
@@ -1899,10 +2150,12 @@
       "target": "026",
       "distance": 51.30956934451461,
       "duration": 30.0,
-      "trips": 1018,
+      "trips": 1019,
       "route_type": "regional",
+      "trip_id": "OCESN857514F4516186:2025-06-17T23:52:01Z",
+      "departure_time": "2025-09-29T10:16:00Z",
       "train_types": {
-        "TGV": 541,
+        "TGV": 542,
         "INTERCITES": 61,
         "TER": 416
       },
@@ -1911,10 +2164,12 @@
     {
       "source": "026",
       "target": "034",
-      "distance": 61.64325368559797,
+      "distance": 81.40685054146448,
       "duration": 36.0,
       "trips": 519,
       "route_type": "regional",
+      "trip_id": "OCESN5354F4759021:2025-07-02T23:28:40Z",
+      "departure_time": "2025-11-08T12:33:00Z",
       "train_types": {
         "TGV": 312,
         "TER": 207
@@ -1928,6 +2183,8 @@
       "duration": 54.0,
       "trips": 308,
       "route_type": "regional",
+      "trip_id": "OCESN2583F4534673:2025-06-17T23:52:01Z",
+      "departure_time": "2025-09-22T19:20:00Z",
       "train_types": {
         "TGV": 80,
         "TER": 228
@@ -1937,10 +2194,12 @@
     {
       "source": "020",
       "target": "033",
-      "distance": 30.52578035842226,
+      "distance": 34.616413533606185,
       "duration": 21.0,
       "trips": 452,
       "route_type": "regional",
+      "trip_id": "OCESN88539F4829960:2025-08-10T22:39:17Z",
+      "departure_time": "2025-11-11T17:24:00Z",
       "train_types": {
         "TER": 452
       },
@@ -1949,12 +2208,14 @@
     {
       "source": "LUX",
       "target": "033",
-      "distance": 8.821391771930722,
+      "distance": 11.16848732221128,
       "duration": 9.0,
-      "trips": 774,
+      "trips": 776,
       "route_type": "regional",
+      "trip_id": "OCESN837699F4526271:2025-08-10T22:39:17Z",
+      "departure_time": "2025-09-01T07:24:00Z",
       "train_types": {
-        "TGV": 145,
+        "TGV": 147,
         "TER": 629
       },
       "dominant_train_type": "TER"
@@ -1962,12 +2223,14 @@
     {
       "source": "033",
       "target": "010",
-      "distance": 95.6123264711538,
+      "distance": 121.51734037589554,
       "duration": 34.0,
-      "trips": 529,
+      "trips": 535,
       "route_type": "regional",
+      "trip_id": "OCESN5450F4542302:2025-06-17T23:52:01Z",
+      "departure_time": "2025-08-15T04:19:00Z",
       "train_types": {
-        "TGV": 348,
+        "TGV": 354,
         "TER": 179,
         "ICE": 2
       },
@@ -1978,10 +2241,12 @@
       "target": "029",
       "distance": 72.4492546671228,
       "duration": 41.0,
-      "trips": 816,
+      "trips": 832,
       "route_type": "regional",
+      "trip_id": "OCESN832300F5147750:2025-08-10T22:39:17Z",
+      "departure_time": "2025-08-12T02:57:00Z",
       "train_types": {
-        "TER": 513,
+        "TER": 529,
         "TGV": 285,
         "ICE": 18
       },
@@ -1994,6 +2259,8 @@
       "duration": 52.0,
       "trips": 108,
       "route_type": "regional",
+      "trip_id": "OCESN843928F5158095:2025-08-11T22:41:47Z",
+      "departure_time": "2025-08-25T18:58:00Z",
       "train_types": {
         "TER": 108
       },
@@ -2004,20 +2271,24 @@
       "target": "038",
       "distance": 11.288796098226559,
       "duration": 8.0,
-      "trips": 225,
+      "trips": 226,
       "route_type": "regional",
+      "trip_id": "OCESN841200F4797218:2025-08-04T22:46:43Z",
+      "departure_time": "2025-08-25T02:52:00Z",
       "train_types": {
-        "TER": 225
+        "TER": 226
       },
       "dominant_train_type": "TER"
     },
     {
       "source": "004",
       "target": "048",
-      "distance": 39.75214148292705,
+      "distance": 65.98111779522404,
       "duration": 30.0,
       "trips": 182,
       "route_type": "regional",
+      "trip_id": "OCESN844508F4524821:2025-08-04T22:46:43Z",
+      "departure_time": "2025-08-15T11:07:00Z",
       "train_types": {
         "TGV": 29,
         "TER": 153
@@ -2031,6 +2302,8 @@
       "duration": 4.0,
       "trips": 163,
       "route_type": "regional",
+      "trip_id": "OCESN843600F4505076:2025-08-04T22:46:43Z",
+      "departure_time": "2025-10-20T04:12:00Z",
       "train_types": {
         "TER": 163
       },
@@ -2043,6 +2316,8 @@
       "duration": 47.0,
       "trips": 3,
       "route_type": "regional",
+      "trip_id": "OCESN7173F3910400:2025-07-16T23:17:51Z",
+      "departure_time": "2025-09-01T13:44:00Z",
       "train_types": {
         "TGV": 3
       },
@@ -2055,6 +2330,8 @@
       "duration": 55.0,
       "trips": 99,
       "route_type": "regional",
+      "trip_id": "OCESN846419F5243539:2025-08-09T22:41:15Z",
+      "departure_time": "2025-08-12T11:09:00Z",
       "train_types": {
         "TGV": 60,
         "TER": 39
@@ -2064,16 +2341,16 @@
   ],
   "statistics": {
     "total_cities": 50,
-    "total_connections": 123,
+    "total_connections": 125,
     "major_cities": 18,
     "medium_cities": 32,
     "small_cities": 0,
-    "total_trips": 31945,
-    "avg_distance": 175.46509442276414,
-    "avg_duration": 87.78048780487805,
-    "high_speed_routes": 13,
-    "intercity_routes": 30,
-    "regional_routes": 80,
+    "total_trips": 32568,
+    "avg_distance": 185.82862508621852,
+    "avg_duration": 92.824,
+    "high_speed_routes": 54,
+    "intercity_routes": 16,
+    "regional_routes": 52,
     "max_connections": 37,
     "total_population": 40638762
   }

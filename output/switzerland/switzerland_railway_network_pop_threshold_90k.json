@@ -1,0 +1,236 @@
+{
+  "metadata": {
+    "export_date": "2025-09-11T22:37:39.668746",
+    "country_code": "switzerland",
+    "country_name": "Switzerland",
+    "graph_type": "railway_network",
+    "node_count": 6,
+    "edge_count": 10,
+    "coordinate_system": "WGS84",
+    "description": "Switzerland Railway Network Data",
+    "key_column": "code_commune",
+    "exporter_version": "1.0"
+  },
+  "nodes": [
+    {
+      "id": "230",
+      "name": "Winterthur",
+      "x": 2697434.138728324,
+      "y": 1261524.190751445,
+      "connections": 1,
+      "population": 120344,
+      "type": "medium",
+      "code": "230"
+    },
+    {
+      "id": "261",
+      "name": "Zürich",
+      "x": 2682515.724436742,
+      "y": 1248524.2547660312,
+      "connections": 5,
+      "population": 436370,
+      "type": "major",
+      "code": "261"
+    },
+    {
+      "id": "2701",
+      "name": "Basel",
+      "x": 2611570.314741036,
+      "y": 1267295.7609561754,
+      "connections": 3,
+      "population": 177522,
+      "type": "medium",
+      "code": "2701"
+    },
+    {
+      "id": "351",
+      "name": "Bern",
+      "x": 2599594.3588709678,
+      "y": 1199776.3830645161,
+      "connections": 4,
+      "population": 137963,
+      "type": "medium",
+      "code": "351"
+    },
+    {
+      "id": "5586",
+      "name": "Lausanne",
+      "x": 2538273.3333333335,
+      "y": 1153395.7955555555,
+      "connections": 4,
+      "population": 144809,
+      "type": "medium",
+      "code": "5586"
+    },
+    {
+      "id": "6621",
+      "name": "Genève",
+      "x": 2500041.452631579,
+      "y": 1117965.252631579,
+      "connections": 3,
+      "population": 208991,
+      "type": "major",
+      "code": "6621"
+    }
+  ],
+  "edges": [
+    {
+      "source": "230",
+      "target": "261",
+      "distance": 16.657766379277625,
+      "duration": 15.0,
+      "trips": 6516,
+      "route_type": "regional",
+      "trip_id": "326.TA.91-13-j25-1.168.H",
+      "train_types": {
+        "INTERCITY": 5067,
+        "HIGH-SPEED": 1447,
+        "INTER-REGIONAL": 2
+      },
+      "dominant_train_type": "INTERCITY"
+    },
+    {
+      "source": "261",
+      "target": "2701",
+      "distance": 73.55842290030718,
+      "duration": 51.0,
+      "trips": 10223,
+      "route_type": "regional",
+      "trip_id": "734.TA.91-2N-Y-j25-1.264.R",
+      "train_types": {
+        "HIGH-SPEED": 9150,
+        "INTERCITY": 1053,
+        "INTER-REGIONAL": 20
+      },
+      "dominant_train_type": "HIGH-SPEED"
+    },
+    {
+      "source": "261",
+      "target": "351",
+      "distance": 95.8987733934429,
+      "duration": 54.0,
+      "trips": 5647,
+      "route_type": "regional",
+      "trip_id": "700.TA.91-1-D-j25-1.281.H",
+      "train_types": {
+        "INTERCITY": 3863,
+        "HIGH-SPEED": 1782,
+        "INTER-REGIONAL": 2
+      },
+      "dominant_train_type": "INTERCITY"
+    },
+    {
+      "source": "261",
+      "target": "5586",
+      "distance": 173.6541384440715,
+      "duration": 134.0,
+      "trips": 2025,
+      "route_type": "intercity",
+      "trip_id": "44.TA.91-D3-Y-j25-1.40.H",
+      "train_types": {
+        "HIGH-SPEED": 1928,
+        "INTERCITY": 97
+      },
+      "dominant_train_type": "HIGH-SPEED"
+    },
+    {
+      "source": "261",
+      "target": "6621",
+      "distance": 223.85574459027436,
+      "duration": 199.0,
+      "trips": 12,
+      "route_type": "intercity",
+      "trip_id": "187.TA.91-9Y-Y-j25-1.148.H",
+      "train_types": {
+        "INTERCITY": 3,
+        "HIGH-SPEED": 9
+      },
+      "dominant_train_type": "HIGH-SPEED"
+    },
+    {
+      "source": "2701",
+      "target": "351",
+      "distance": 67.45178175352721,
+      "duration": 54.0,
+      "trips": 4982,
+      "route_type": "regional",
+      "trip_id": "132.TA.91-61-A-j25-1.52.H",
+      "train_types": {
+        "HIGH-SPEED": 2306,
+        "INTERCITY": 2676
+      },
+      "dominant_train_type": "INTERCITY"
+    },
+    {
+      "source": "2701",
+      "target": "5586",
+      "distance": 135.7513143997097,
+      "duration": 154.0,
+      "trips": 3,
+      "route_type": "regional",
+      "trip_id": "53.TA.91-D3-Y-j25-1.49.H",
+      "train_types": {
+        "HIGH-SPEED": 3
+      },
+      "dominant_train_type": "HIGH-SPEED"
+    },
+    {
+      "source": "351",
+      "target": "5586",
+      "distance": 78.09472716019155,
+      "duration": 68.0,
+      "trips": 2896,
+      "route_type": "regional",
+      "trip_id": "2134.TA.91-1-D-j25-1.903.R",
+      "train_types": {
+        "INTERCITY": 2783,
+        "HIGH-SPEED": 113
+      },
+      "dominant_train_type": "INTERCITY"
+    },
+    {
+      "source": "351",
+      "target": "6621",
+      "distance": 128.65456455648413,
+      "duration": 115.0,
+      "trips": 16,
+      "route_type": "regional",
+      "trip_id": "168.TA.91-9Y-Y-j25-1.130.H",
+      "train_types": {
+        "INTERCITY": 12,
+        "HIGH-SPEED": 4
+      },
+      "dominant_train_type": "INTERCITY"
+    },
+    {
+      "source": "5586",
+      "target": "6621",
+      "distance": 50.52648278367612,
+      "duration": 37.0,
+      "trips": 9632,
+      "route_type": "regional",
+      "trip_id": "127.TA.91-2E-Y-j25-1.12.R",
+      "train_types": {
+        "HIGH-SPEED": 6748,
+        "INTERCITY": 2304,
+        "REGIONAL": 580
+      },
+      "dominant_train_type": "HIGH-SPEED"
+    }
+  ],
+  "statistics": {
+    "total_cities": 6,
+    "total_connections": 10,
+    "major_cities": 2,
+    "medium_cities": 4,
+    "small_cities": 0,
+    "total_trips": 41952,
+    "avg_distance": 104.41037163609624,
+    "avg_duration": 88.1,
+    "high_speed_routes": 0,
+    "intercity_routes": 0,
+    "regional_routes": 0,
+    "max_connections": 5,
+    "total_population": 1225999
+  }
+}

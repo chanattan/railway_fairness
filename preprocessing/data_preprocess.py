@@ -175,7 +175,7 @@ def plot_city_graph(G_city, cities_gdf):
 
 # === MAIN ===
 
-if __name__ == "__main__":
+if __name__ == "__main2__":
     print("Shapely version", shapely.__version__)
     # ⚠️ Remplace par les chemins réels
     pbf_path = "resources/france-rail.osm.pbf"
@@ -202,3 +202,87 @@ if __name__ == "__main__":
     plot_city_graph(G_city, cities)
 
 # 18:40
+
+
+# Préfiltrage sur la Suisse : trop de trips
+
+def extract_train_type(stop_modes, stop_id):
+    # Pour la Suisse, le type est directement dans le route type
+    # Le type doit être dans [101, 102, 103, 106] pour être un train
+    if 101 in stop_modes[stop_id]:
+        return 'HIGH-SPEED'
+    elif 102 in stop_modes[stop_id]:
+        return 'INTERCITY' # / EUROCITY
+    elif 103 in stop_modes[stop_id]:
+        return 'INTER-REGIONAL'
+    elif 106 in stop_modes[stop_id]:
+        return 'REGIONAL'
+    else:
+        return 'CAR' # Default filtré
+
+import zipfile
+import pandas as pd
+
+def load_gtfs(gtfs_zip):
+    # Print file names inside the zip
+    with zipfile.ZipFile(gtfs_zip, 'r') as z:
+        # if '/' in filename, add folder name to files
+        folder_name = ''
+        for filename in z.namelist():
+            if '/' in filename:
+                folder_name = (filename.split('/')[0]) + '/'
+                break
+        stops = pd.read_csv(z.open(folder_name + 'stops.txt'))
+        stop_times = pd.read_csv(z.open(folder_name + 'stop_times.txt'))
+        trips = pd.read_csv(z.open(folder_name + 'trips.txt'))
+        routes = pd.read_csv(z.open(folder_name + 'routes.txt'))
+    return stops, stop_times, trips, routes
+
+if __name__ == "__main__":
+
+    print("Début Prefiltrage GTFS Suisse...")
+
+    gtfs_zip = "resources/gtfs/switzerland/gtfs_open_transport_data_2025.zip"
+
+    stops, stop_times, trips, routes = load_gtfs(gtfs_zip)
+
+    # Créer le mapping stop_id -> mode de transport
+    # trip_id -> route_type
+    trips_routes = trips.merge(routes[["route_id", "route_type"]], on="route_id", how="left")
+    # stop_id -> route_type
+    stop_route_types = stop_times.merge(trips_routes[["trip_id", "route_type"]], on="trip_id", how="left")
+    # Grouper par stop_id et collecter les modes de transport
+    stop_modes = stop_route_types.groupby("stop_id")["route_type"].apply(set).to_dict()
+
+    merged = stop_times.merge(trips, on="trip_id").sort_values(["trip_id", "stop_sequence"])
+    trip_ids = []
+    for trip_id, group in merged.groupby("trip_id"):
+        group = group.sort_values("stop_sequence")
+
+        keep = True
+        for _, s in group.iterrows():
+            train_type = extract_train_type(stop_modes, s.stop_id)
+            if train_type == 'CAR':
+                #filtered_cars += 1
+                keep = False
+                break
+            
+        # Save trip id
+        if keep:
+            trip_ids.append(trip_id)
+
+    # On recrée stop_times.txt et stops.txt avec uniquement les trips valides
+    filtered_stop_times = stop_times[stop_times["trip_id"].isin(trip_ids)]
+    print(f"\n✅ Stop times valides après filtrage : {len(filtered_stop_times)}")
+    filtered_stop_times.to_csv("resources/gtfs/switzerland/filtered_stop_times.txt", index=False)
+    print("Fichier filtered_stop_times.txt créé.")
+    filtered_stops = stops[stops["stop_id"].isin(filtered_stop_times["stop_id"].unique())]
+    print(f"\n✅ Stops valides après filtrage : {len(filtered_stops)}")
+    filtered_stops.to_csv("resources/gtfs/switzerland/filtered_stops.txt", index=False)
+    print("Fichier filtered_stops.txt créé.")
+    # Pas besoin pour routes.txt
+    # On recrée le nouveau fichier trips.txt avec uniquement les trips valides
+    filtered_trips = trips[trips["trip_id"].isin(trip_ids)]
+    print(f"\n✅ Trips valides après filtrage : {len(filtered_trips)}")
+    filtered_trips.to_csv("resources/gtfs/switzerland/filtered_trips.txt", index=False)
+    print("Fichier filtered_trips.txt créé.")

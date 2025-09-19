@@ -1,10 +1,12 @@
-from config import *
+import config
 import plotly.graph_objects as go
 import plotly.express as px
 import networkx as nx
 import pandas as pd
 import matplotlib.pyplot as plt
 from math import radians, cos, sin, asin, sqrt
+from shapely.geometry import Point
+from datetime import datetime, timedelta
 
 # haversine distance en km
 def haversine(lon1, lat1, lon2, lat2):
@@ -13,19 +15,19 @@ def haversine(lon1, lat1, lon2, lat2):
     a = sin(dlat/2)**2 + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlon/2)**2
     return 2 * R * asin(sqrt(a))
 
-def build_city_graph(cities, stops, stop_times, trips, stops_to_gares, gares_to_cities, agglomerations):
+def __build_city_graph(cities, stops, stop_times, trips, stops_to_gares, gares_to_cities, agglomerations):
     import networkx as nx
     import pandas as pd
 
     G_city = nx.Graph()
     # Ensemble des agglomérations valides
-    valid_agglos = set(cities[key])
+    valid_agglos = set(cities[config.key])
     print(f"[DEBUG] Nombre de communes valides :", len(valid_agglos))
 
     # Ajouter les noeuds
     for _, row in cities.iterrows():
-        city = row[key]
-        name = row['nom_aire' if key == 'code_aire' else name_attr]
+        city = row[config.key]
+        name = row['nom_aire' if config.by_agg else config.name_attr]
         G_city.add_node(city, name=name, insee='code_insee')
 
     merged = stop_times.merge(trips, on="trip_id").sort_values(["trip_id", "stop_sequence"])
@@ -42,7 +44,7 @@ def build_city_graph(cities, stops, stop_times, trips, stops_to_gares, gares_to_
         uic_sequence = []
 
         for _, s in group.iterrows():
-            gare = stops_to_gares.get(s.stop_id, {}).get('uic_code', None)
+            gare = stops_to_gares.get(s.stop_id, {}).get('code_uic', None)
             if gare is None:
                 stops_without_gare += 1
                 continue
@@ -89,10 +91,6 @@ def build_city_graph(cities, stops, stop_times, trips, stops_to_gares, gares_to_
                 print("Found Caen - Rennes")
                 print(f"c1 {c1} c2 {c2} s1 {s1} s2 {s2}")
 
-            # Récupérer stops originaux pour distance/duration
-            st1 = stops.loc[stops.stop_id == s1.stop_id].iloc[0]
-            st2 = stops.loc[stops.stop_id == s2.stop_id].iloc[0]
-            dist = haversine(st1.stop_lon, st1.stop_lat, st2.stop_lon, st2.stop_lat)
 
             t1 = pd.to_datetime(s1.departure_time, errors="coerce")
             t2 = pd.to_datetime(s2.arrival_time, errors="coerce")
@@ -111,9 +109,9 @@ def build_city_graph(cities, stops, stop_times, trips, stops_to_gares, gares_to_
     print(f"[DEBUG] {stops_without_gare} arrêts sans gare associée, {gares_without_city} gares sans ville associée.")
     return G_city
 
-def plot_city_graph(G_city, cities):
-    pos = {str(row[key]): (row.geometry.x, row.geometry.y)
-           for _, row in cities.iterrows() if row[key] in G_city.nodes}
+def __plot_city_graph(G_city, cities):
+    pos = {str(row[config.key]): (row.geometry.x, row.geometry.y)
+           for _, row in cities.iterrows() if row[config.key] in G_city.nodes}
 
     plt.figure(figsize=(12, 12))
     nx.draw_networkx_edges(G_city, pos, alpha=0.3)
@@ -125,64 +123,186 @@ def plot_city_graph(G_city, cities):
 def extract_train_type(stop_modes, stop_id):
     """
     Extrait le type de train depuis le stop_id
-    Retourne: 'TER', 'TGV', 'INTERCITES', 'ICE', 'UNKNOWN'
+    Retourne: 'TER', 'TGV', 'INTERCITES', 'ICE', 'UNKNOWN' pour la France.
     """
-    # On vérifie le route type pour préfiltrer, ensuite on regarde le type précisément.
-    # 0 - Tram, 1 - Subway, 2 - Rail, 3 - Bus, 4 - Ferry, ...
-    #print("DEBUG --- STOP modes :", stop_id, stop_modes.get(stop_id, set()))
-    if 2 not in stop_modes[stop_id]:
-        # C'est pas un train
-        return 'CAR' # Default filtré
-    if 'OCECar' in stop_id:
-        return 'CAR'  # À filtrer
-    elif 'OCETrain TER' in stop_id:
-        return 'TER'
-    elif 'OCETGV INOUI' in stop_id:
-        return 'TGV'
-    elif 'OCEINTERCITES' in stop_id:
-        return 'INTERCITES'
-    elif 'OCEICE' in stop_id:
-        return 'ICE'
+    if config.country == 'france':
+        # On vérifie le route type pour préfiltrer, ensuite on regarde le type précisément.
+        # 0 - Tram, 1 - Subway, 2 - Rail, 3 - Bus, 4 - Ferry, ...
+        #print("DEBUG --- STOP modes :", stop_id, stop_modes.get(stop_id, set()))
+        if 2 not in stop_modes[stop_id]:
+            # C'est pas un train
+            return 'CAR' # Default filtré
+        if 'OCECar' in stop_id:
+            return 'CAR'
+        elif 'OCETrain TER' in stop_id:
+            return 'TER'
+        elif 'OCETGV INOUI' in stop_id:
+            return 'TGV'
+        elif 'OCEINTERCITES' in stop_id:
+            return 'INTERCITES'
+        elif 'OCEICE' in stop_id:
+            return 'ICE'
+        else:
+            return 'UNKNOWN'
+    elif config.country == 'switzerland':
+        # Pour la Suisse, le type est directement dans le route type
+        # Le type doit être dans [101, 102, 103, 106] pour être un train
+        if 101 in stop_modes[stop_id]:
+            return 'HIGH-SPEED'
+        elif 102 in stop_modes[stop_id]:
+            return 'INTERCITY' # / EUROCITY
+        elif 103 in stop_modes[stop_id]:
+            return 'INTER-REGIONAL'
+        elif 106 in stop_modes[stop_id]:
+            return 'REGIONAL'
+        else:
+            return 'CAR' # Default filtré
     else:
-        return 'UNKNOWN'
+        raise ValueError(f"Pays inconnu pour extraction type train: {config.country}")
 
-def build_city_graph_with_trips(cities, stop_modes, stops, stop_times, trips, stops_to_gares, gares_to_cities, communes, aires):
+import re, pytz
+from datetime import datetime, timedelta
+
+def debug_trip(trip_id, s1, s2, stops_to_gares, gares_to_cities, calendar_dict, aggl, country='france'):
+    # s1/s2 doivent fournir:
+    # - departure_time (str, format GTFS "HH:MM:SS" possibly >=24)
+    # - departure_time_td (pd.Timedelta) OPTIONAL for duration calc
+    # - arrival_time (str) and arrival_time_td
+    
+    g1 = stops_to_gares.get(s1.stop_id, {}).get('code_uic', None)
+    g2 = stops_to_gares.get(s2.stop_id, {}).get('code_uic', None) if s2 is not None else None
+    if g1 is not None:
+        v1 = gares_to_cities.get(g1, {}).get(config.name_attr, None)
+    else:
+        v1 = ""
+    if g2 is not None:
+        v2 = gares_to_cities.get(g2, {}).get(config.name_attr, None)
+    else:
+        v2 = ""
+    if (trip_id == "OCESN13104F4535914:2025-06-17T23:52:01Z"):
+        print(f"AGGL {aggl} ---")
+    else:
+        return
+    print(f"> Gare S1 : {g1} ; Ville S1 : {v1}")
+    if v2 is not None:
+        print(f"> Gare S2 : {g2} ; Ville S2 : {v2}")
+
+    # 1) date choisie (calendar) et fallback au trip_id si présent
+    date_from_calendar = calendar_dict.get(trip_id)
+    m = re.search(r'(\d{4}-\d{2}-\d{2})T', trip_id)
+    date_from_tripid = m.group(1).replace('-', '') if m else None
+
+    print("trip_id:", trip_id)
+    print("date_from_calendar:", date_from_calendar)
+    print("date_from_tripid:", date_from_tripid)
+
+    # 2) raw times
+    print("s1.departure_time (raw):", s1.departure_time)
+    if s2 is not None:
+        print("s2.arrival_time   (raw):", s2.arrival_time)
+
+    # 3) timedeltas if available
+    try:
+        td1 = s1.departure_time_td
+        if s2 is not None:
+            td2 = s2.arrival_time_td
+        print("s1.departure_time_td:", td1, " seconds:", td1.total_seconds())
+        if s2 is not None:
+            print("s2.arrival_time_td  :", td2, " seconds:", td2.total_seconds())
+    except Exception:
+        print("No *_td fields available (ok if you didn't create them).")
+    if s2 is None:
+        return
+    # 4) chosen date logic (prefer trip_id date if present)
+    chosen_date = date_from_tripid or date_from_calendar
+    if chosen_date is None:
+        print("No date found for this trip -> cannot compute UTC departure.")
+        return
+
+    print("Chosen date (YYYYMMDD):", chosen_date)
+
+    # 5) build local datetimes with GTFS hour >=24 handling
+    def make_local_dt(date_yyyymmdd, time_str, country):
+        hrs, mins, secs = map(int, time_str.split(":"))
+        extra_days, hour = divmod(hrs, 24)
+        base = datetime.strptime(date_yyyymmdd, "%Y%m%d")
+        dt_local = base + timedelta(days=extra_days, hours=hour, minutes=mins, seconds=secs)
+        tz = pytz.timezone({'france':'Europe/Paris','switzerland':'Europe/Zurich'}.get(country,'Europe/Paris'))
+        dt_loc = tz.localize(dt_local)
+        return dt_loc
+
+    dt1_local = make_local_dt(chosen_date, s1.departure_time, country)
+    dt2_local = make_local_dt(chosen_date, s2.arrival_time, country)
+
+    print("dt1_local:", dt1_local.isoformat(), " offset:", dt1_local.utcoffset())
+    print("dt1_UTC  :", dt1_local.astimezone(pytz.UTC).isoformat())
+    print("dt2_local:", dt2_local.isoformat(), " offset:", dt2_local.utcoffset())
+    print("dt2_UTC  :", dt2_local.astimezone(pytz.UTC).isoformat())
+
+    # 6) duration via datetimes (robuste)
+    delta = dt2_local - dt1_local
+    secs = delta.total_seconds()
+    print("duration via datetimes (s):", secs, " -> minutes:", secs/60)
+
+
+def build_city_graph_with_trips(cities, stop_modes, stops, stop_times, trips, calendar, stops_to_gares, gares_to_cities, communes, aires):
     """
-    Version modifiée qui stocke les trip_ids et autres infos dans les arêtes
+        Crée un graphe ville-à-ville à partir des données GTFS.
+        Version modifiée qui stocke les trip_ids et autres infos dans les arêtes.
     """
     import networkx as nx
     import pandas as pd
 
     G_city = nx.Graph()
+
     # Ensemble des agglomérations valides
-    valid_agglos = set(cities[key])
-    print(f"[DEBUG] Nombre de communes valides :", len(valid_agglos))
+    valid_agglos = set(cities[config.key])
+    valid_cities = set(cities['code_insee' if config.country == 'france' else 'code_commune'])
+    print(f"[DEBUG] Nombre d'agglomérations valides :", len(valid_agglos))
+
+    # Convertir les temps en timedelta pour faciliter les calculs
+    stop_times["arrival_time_td"] = pd.to_timedelta(stop_times["arrival_time"])
+    stop_times["departure_time_td"] = pd.to_timedelta(stop_times["departure_time"])
 
     # Ajouter les noeuds (unités urbaines ou villes)
     for _, row in cities.iterrows():
-        city = row[key]
-        name = row['nom_aire' if key == 'code_aire' else name_attr]
-        #if name is not None and not pd.isna(name) and "Toulouse" in name:
-        #    print(f"[DEBUG] POPULATION {name} : {unites_urbaines[row['code_aire']]['population'] if key == 'code_aire' else city['population']}")
-        #print("Aires :::::", aires.get(row['code_aire'], row) if key == 'code_aire' else row)
-        #print("DEBUG city:", city, name, row['code_insee'], aires[row['code_aire']]['population'] if key == 'code_aire' else row['population'])
-        pos = (aires[row['code_aire']]['geometry'].x, aires[row['code_aire']]['geometry'].y) if key == 'code_aire' else (row.geometry.x, row.geometry.y)
+        if config.country == 'france':
+            city = row[config.key]
+            name = row['nom_aire' if config.by_agg else config.name_attr]
+            #print("Aires :::::", aires.get(row['code_aire'], row) if config.key == 'code_aire' else row)
+            #print("DEBUG city:", city, name, row['code_insee'], aires[row['code_aire']]['population'] if config.key == 'code_aire' else row['population'])
+            pos = (aires[row['code_aire']]['geometry'].x, aires[row['code_aire']]['geometry'].y) if config.by_agg else (row.geometry.x, row.geometry.y)
+            population = aires.get(row['code_aire'], {}).get('population', row['population']) if config.by_agg else row['population']
+        elif config.country == 'switzerland':
+            city = row[config.key]
+            name = row[config.name_attr]
+            # Reprojection en 4326 pour l'affichage
+            cities = cities.to_crs(epsg=4326)
+            pos = (row.geometry.x, row.geometry.y)
+            population = int(row['population'])
+        else:
+            raise ValueError(f"Pays inconnu pour construction graphe: {config.country}")
+        
         G_city.add_node(city,
                         name=name,
-                        insee=row['code_insee'],
-                        population=aires.get(row['code_aire'], {}).get('population', row['population']) if key == 'code_aire' else row['population'],
+                        code=row[config.key],
+                        population=population,
                         x=pos[0],
                         y=pos[1])
 
+    # Traitement des données rapide
     merged = stop_times.merge(trips, on="trip_id").sort_values(["trip_id", "stop_sequence"])
+    stops_indexed = stops.set_index('stop_id')
 
     stops_without_gare = 0
     gares_without_city = 0
     filtered_cars = 0
+    import sys
 
     # Dictionnaire pour stocker les trip_ids par arête
     edge_trips = {}
 
+    # Pour un trajet (trip_id) on construit les lignes qui en découlent (pour chaque paire de villes consécutives) : d'où l'usage de continue au lieu de break plus tard.
     for trip_id, group in merged.groupby("trip_id"):
         group = group.sort_values("stop_sequence")
 
@@ -191,45 +311,49 @@ def build_city_graph_with_trips(cities, stop_modes, stops, stop_times, trips, st
         stops_sequence = []
         uic_sequence = []
         train_types = []
+        saved_aglo = []
 
-        for _, s in group.iterrows():
+        for s in group.itertuples(index=False):
+            print(f"\r[DEBUG] Processing trip {trip_id} stop {s.stop_id}...", end="")
             train_type = extract_train_type(stop_modes, s.stop_id)
-            if train_type == 'CAR':
-                filtered_cars += 1
-                continue
 
-            gare = stops_to_gares.get(s.stop_id, {}).get('uic_code', None)
+            if train_type == 'CAR':
+                #filtered_cars += 1
+                break # On peut ignorer les voyages car
+
+            gare = stops_to_gares.get(s.stop_id, {}).get('code_uic', None)
             if gare is None:
                 stops_without_gare += 1
-                continue
-
-            city_codeinsee = gares_to_cities.get(gare, {}).get('code_insee', None)
-            if city_codeinsee is None:
+                continue # Pas d'affectation gare, on peut ignorer tant qu'il y a au moins une gare affectée (sinon tout est ignoré et le trip n'est pas construit).
+            
+            city_code = gares_to_cities.get(gare, {}).get(config.city_codes[config.country], None)
+            if city_code is None:
                 gares_without_city += 1
-                continue
+                continue # Si la ville pour ce stop n'est pas trouvée, c'est que la ville est filtrée (peu de chance que ce soit les données, car on fait un goulot d'étranglement sur les valeurs na avant).
 
-            if key == 'code_aire':
-                aggl = communes.get(city_codeinsee, {}).get('code_aire', None)
-                if aggl is None:
-                    continue
-
-            agglos_sequence.append(aggl if key == 'code_aire' else city_codeinsee)
+            agglos_sequence.append(city_code)
             stops_sequence.append(s)
             uic_sequence.append(gare)
             train_types.append(train_type)
 
         # Filtrer seulement les agglos présentes dans cities_df et supprimer doublons consécutifs
+        # On ne garde que le dernier item qui est consécutif avec le précédent : c'est le dernier arrêt capturé.
+        last_idx = {}
+        for i, aggl in enumerate(agglos_sequence):
+            if aggl in valid_cities:
+                last_idx[aggl] = i
+
+        # then we build reduced lists, keeping only elements at last occurrences (furthest stops)
         reduced_seq = []
         reduced_stops = []
         reduced_types = []
-        for idx, aggl in enumerate(agglos_sequence):
-            if aggl in valid_agglos:
-                if not reduced_seq or aggl != reduced_seq[-1]:
-                    reduced_seq.append(aggl)
-                    reduced_stops.append(stops_sequence[idx])
-                    reduced_types.append(train_types[idx])
+        for i, aggl in enumerate(agglos_sequence):
+            if aggl in valid_cities and last_idx[aggl] == i:
+                reduced_seq.append(aggl)
+                reduced_stops.append(stops_sequence[i])
+                reduced_types.append(train_types[i])
 
-        # Créer les arêtes entre agglomérations consécutives
+        # Créer les metadata pour les arêtes entre communes consécutives
         for i in range(len(reduced_seq) - 1):
             c1, c2 = reduced_seq[i], reduced_seq[i + 1]
             s1, s2 = reduced_stops[i], reduced_stops[i + 1]
@@ -239,42 +363,97 @@ def build_city_graph_with_trips(cities, stop_modes, stops, stop_times, trips, st
             segment_type = type1 if type1 != 'UNKNOWN' else type2
 
             # Récupérer stops originaux pour distance/duration
-            st1 = stops.loc[stops.stop_id == s1.stop_id].iloc[0]
-            st2 = stops.loc[stops.stop_id == s2.stop_id].iloc[0]
+            st1 = stops_indexed.loc[s1.stop_id]
+            st2 = stops_indexed.loc[s2.stop_id]
+            # Calcul distance géodésique pour éviter pb projection
+            # Voir https://geopy.readthedocs.io/en/stable/#module-geopy
+            # Create geometries with stop_lon and stop_lat
+            g1 = stops_to_gares.get(s1.stop_id, {}).get('geometry', None)
+            g2 = stops_to_gares.get(s2.stop_id, {}).get('geometry', None)
+            if g1 is None or g2 is None:
+                continue
+            name = stops_to_gares.get(s1.stop_id, {}).get(config.name_attr, 'Unknown')
+            
+            # Cette première version servait à avoir les distances rapidement, cela est réecrit dans data_enricher.py.
             dist = haversine(st1.stop_lon, st1.stop_lat, st2.stop_lon, st2.stop_lat)
 
-            t1 = pd.to_datetime(s1.departure_time, errors="coerce")
-            t2 = pd.to_datetime(s2.arrival_time, errors="coerce")
+            t1 = s1.departure_time_td
+            t2 = s2.arrival_time_td
             if pd.isna(t1) or pd.isna(t2):
                 continue
-            duration = (t2 - t1).seconds / 60
+            # Calcul du temps de trajet, en comptant les trains qui sont sur deux jours (tard le soir et arrivée tôt le lendemain matin).
+            date_str = calendar.get(trip_id)
+            if date_str is None:
+                unknown_date += 1
+                duration = (t2 - t1).total_seconds() / 60 # On calcule juste une durée, peut-être qu'elle n'est pas correcte (correction après)
+            else:
+                # date du service
+                base_date = datetime.strptime(str(date_str), "%Y%m%d")
 
-            # Stocker les trip_ids pour cette arête
+                # departure_time / arrival_time sont en str "HH:MM:SS"
+                h1, m1, ss1 = map(int, s1.departure_time.split(":"))
+                h2, m2, ss2 = map(int, s2.arrival_time.split(":"))
+
+                dt1 = base_date + timedelta(hours=h1, minutes=m1, seconds=ss1)
+                dt2 = base_date + timedelta(hours=h2, minutes=m2, seconds=ss2)
+
+                # si heure > 23 timedelta gère automatiquement en ajoutant le jour
+                duration = (dt2 - dt1).total_seconds() / 60
+            #debug_trip(trip_id, s1, s2, stops_to_gares, gares_to_cities, calendar, None)
+
+            # On conserve le trip_id à titre de référence de trajet mais également le departure time (date complète)
+            # afin de faire les requêtes sur les distances réelles dans data_enricher.py.
+            # get_departure_utc renvoie la date adaptée pour une requête à Google
+            departure_time = config.get_departure_utc(trip_id, s1.departure_time, calendar, config.country)
+
+            # On sauvegarde les attributs pour l'arête entre communes pour un post-traitement
             edge_key = tuple(sorted([c1, c2]))
             if edge_key not in edge_trips:
                 edge_trips[edge_key] = []
             edge_trips[edge_key].append({
                 'trip_id': trip_id,
                 'route_id': s1.route_id,
-                'stop1': st1.stop_name,
+                'stop1': st1.stop_name, # Le trajet fait stop1 -> stop2.
                 'stop2': st2.stop_name,
-                'departure': s1.departure_time,
-                'arrival': s2.arrival_time,
+                'departure': s1.departure_time_td,
+                'arrival': s2.arrival_time_td,
                 'train_type': segment_type
             })
 
-            if G_city.has_edge(c1, c2):
-                #if dist < G_city[c1][c2]["distance"]:
-                if duration < G_city[c1][c2]["duration"]:
-                    G_city[c1][c2]["duration"] = duration
-                    G_city[c1][c2]["distance"] = dist
-                    G_city[c1][c2]["trip_id"] = trip_id  # trip le plus rapide
-            else:
-                G_city.add_edge(c1, c2, distance=dist, duration=duration, trip_id=trip_id)
+            # Une fois l'arête prête, on crée la véritable arête entre agrégats si requis.
+            if config.by_agg:
+                aggl1 = communes.get(c1, {}).get(config.key, None)
+                aggl2 = communes.get(c2, {}).get(config.key, None)
+                if aggl1 is None or aggl2 is None:
+                    continue # Une des deux extrêmités n'a pas de correspondance, la ligne n'existe pas à l'échelle des agrégats.
+                if aggl1 not in valid_agglos or aggl2 not in valid_agglos:
+                    continue # On ne garde que les agglomérations non-filtrées
+                if aggl1 == aggl2:
+                    continue # Il s'agit d'une ligne interne à l'agrégat.
+                # La ligne est valide.
 
+            n1 = c1 if not config.by_agg else aggl1
+            n2 = c2 if not config.by_agg else aggl2
+
+            # Attributs retenus dans l'arête
+            if G_city.has_edge(n1, n2):
+                #if dist < G_city[c1][c2]["distance"]:
+                #prendre le plus court trajet en temps
+                if duration < G_city[n1][n2]["duration"]:
+                    G_city[n1][n2]["duration"] = duration
+                    G_city[n1][n2]["departure_time"] = departure_time
+                    G_city[n1][n2]["distance"] = dist
+                    G_city[n1][n2]["trip_id"] = trip_id  # trip le plus rapide
+                    G_city[n1][n2]["depart"] = n1
+                    G_city[n1][n2]["depart_com"] = c1
+                    G_city[n1][n2]["arrival_com"] = c2
+            else:
+                G_city.add_edge(n1, n2, distance=dist, duration=duration, trip_id=trip_id, departure_time=departure_time, depart=n1, depart_com=c1, arrival_com=c2)
+
+    print("[DEBUG] Enrichissement des arêtes avec les trajets...")
     # Ajouter les trip_ids aux arêtes
-    for edge in G_city.edges():
-        edge_key = tuple(sorted(edge))
+    for u, v, data in G_city.edges(data=True):
+        edge_key = tuple(sorted([data['depart_com'], data['arrival_com']]))
         if edge_key in edge_trips:
             trips_data = edge_trips[edge_key]
             
@@ -293,18 +472,24 @@ def build_city_graph_with_trips(cities, stop_modes, stops, stop_times, trips, st
                 train_type = trip['train_type']
                 train_type_counts[train_type] = train_type_counts.get(train_type, 0) + 1
             
-            G_city[edge[0]][edge[1]]['trips'] = trips_data
-            G_city[edge[0]][edge[1]]['nb_trips'] = len(trips_data)
-            G_city[edge[0]][edge[1]]['train_types'] = train_type_counts
+            G_city[u][v]['trips'] = trips_data
+            G_city[u][v]['nb_trips'] = len(trips_data)
+            G_city[u][v]['train_types'] = train_type_counts
             
             # Type dominant pour cette arête
             dominant_type = max(train_type_counts, key=train_type_counts.get)
-            G_city[edge[0]][edge[1]]['dominant_train_type'] = dominant_type
+            G_city[u][v]['dominant_train_type'] = dominant_type
+
+            # Cleaning
+            del data['depart_com']
+            del data['arrival_com']
 
     print(f"[DEBUG] Isolated nodes: {len(list(nx.isolates(G_city)))}")
     G_city.remove_nodes_from(list(nx.isolates(G_city)))
-    print(f"[DEBUG] {stops_without_gare} arrêts sans gare associée, {gares_without_city} gares sans ville associée.")
+    print(f"[DEBUG] TERMINÉ - {stops_without_gare} arrêts sans gare associée, {gares_without_city} gares sans ville associée.")
+    sys.stdout.flush()
     return G_city
+    
 
 def plot_interactive_city_graph(G_city, cities, aires):
     """
@@ -312,8 +497,16 @@ def plot_interactive_city_graph(G_city, cities, aires):
     Basée sur la solution du forum Plotly
     """
     # Position des nœuds
-    pos = {str(row[key]): (aires[row['code_aire']]['geometry'].x, aires[row['code_aire']]['geometry'].y) if key == 'code_aire' else (row.geometry.x, row.geometry.y)
-           for _, row in cities.iterrows() if row[key] in G_city.nodes}
+    if config.country == 'france':
+        pos = {str(row[config.key]): (aires[row['code_aire']]['geometry'].x, aires[row['code_aire']]['geometry'].y) if config.by_agg else (row.geometry.x, row.geometry.y)
+            for _, row in cities.iterrows() if row[config.key] in G_city.nodes}
+    elif config.country == 'switzerland':
+        # Conversion vers 4326 pour l'affichage
+        cities = cities.to_crs(epsg=4326)
+        pos = {str(row[config.key]): (row.geometry.x, row.geometry.y)
+               for _, row in cities.iterrows() if row[config.key] in G_city.nodes}
+    else:
+        raise ValueError(f"Pays inconnu pour affichage graphe: {config.country}")
     
     # Debug: vérifier si les arêtes ont des informations trips
     edges_with_trips = 0
