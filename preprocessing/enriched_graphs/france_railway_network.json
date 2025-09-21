@@ -6848,11 +6848,12 @@
         "TER": 144
       },
       "dominant_train_type": "TER",
-      "route_result": [
-        0,
-        0,
-        []
-      ]
+      "route_result": {
+        "distance_m": 86337,
+        "duration_s": 3540,
+        "departure": "2025-09-22T09:37:00Z",
+        "arrival": "2025-09-22T10:36:00Z"
+      }
     },
     {
       "source": "243",
@@ -6867,7 +6868,13 @@
       "train_types": {
         "TER": 282
       },
-      "dominant_train_type": "TER"
+      "dominant_train_type": "TER",
+      "route_result": {
+        "distance_m": 46401,
+        "duration_s": 1740,
+        "departure": "2025-09-22T09:02:00Z",
+        "arrival": "2025-09-22T09:31:00Z"
+      }
     },
     {
       "source": "243",
@@ -6882,7 +6889,13 @@
       "train_types": {
         "TER": 14
       },
-      "dominant_train_type": "TER"
+      "dominant_train_type": "TER",
+      "route_result": {
+        "distance_m": 11802,
+        "duration_s": 960,
+        "departure": "2025-09-22T08:39:00Z",
+        "arrival": "2025-09-22T08:55:00Z"
+      }
     },
     {
       "source": "243",
@@ -6897,7 +6910,12 @@
       "train_types": {
         "TER": 43
       },
-      "dominant_train_type": "TER"
+      "dominant_train_type": "TER",
+      "route_result": [
+        0,
+        0,
+        []
+      ]
     },
     {
       "source": "243",
@@ -6912,7 +6930,13 @@
       "train_types": {
         "TER": 27
       },
-      "dominant_train_type": "TER"
+      "dominant_train_type": "TER",
+      "route_result": {
+        "distance_m": 60134,
+        "duration_s": 3600,
+        "departure": "2025-09-22T10:12:00Z",
+        "arrival": "2025-09-22T11:12:00Z"
+      }
     },
     {
       "source": "243",

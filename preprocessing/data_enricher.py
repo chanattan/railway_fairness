@@ -13,6 +13,7 @@
 import requests
 import json
 import os
+import config
 from shapely.geometry import Point
 import math
 from pyproj import Geod
@@ -192,29 +193,16 @@ def compute_route_between(com1, com2, api_key, departure_time=None):
     La route peut être calculée avec un horaire de départ : utilisé pour prendre les meilleurs trajets.
     """
     # Ou utiliser les coordonnées si disponibles
-    if 'geometry' in com1 and 'geometry' in com2:
-        origin_coords = com1['geometry']
-        dest_coords = com2['geometry']
+    if 'address' in com1 and 'address' in com2:
         
         data = {
-            "origin": {
-                "location": {
-                    "latLng": {
-                        "latitude": origin_coords.y,
-                        "longitude": origin_coords.x
-                    }
-                }
+            "origin": { # Addresses are better than geocoordinates to target a correspoding train station
+                "address": com1["address"]
             },
             "destination": {
-                "location": {
-                    "latLng": {
-                        "latitude": dest_coords.y,
-                        "longitude": dest_coords.x
-                    }
-                }
+                "address": com2["address"]
             },
             "travelMode": "TRANSIT",
-            #"departureTime": departure_time,  # Format RFC3339 UTC "Zulu" time yyyy-mm-ddThh:mm:ssZ
             "computeAlternativeRoutes": False,
             "transitPreferences": {
                 "routingPreference": "FEWER_TRANSFERS",
@@ -222,6 +210,11 @@ def compute_route_between(com1, com2, api_key, departure_time=None):
             },
             "units": "METRIC"
         }
+
+        if departure_time:
+            data["departureTime"] = departure_time # Format RFC3339 UTC "Zulu" time yyyy-mm-ddThh:mm:ssZ
+
+        print("data", data)
         
         url = "https://routes.googleapis.com/directions/v2:computeRoutes"
         headers = {
@@ -234,7 +227,7 @@ def compute_route_between(com1, com2, api_key, departure_time=None):
             response = requests.post(url, headers=headers, json=data)
             if response.status_code == 200:
                 print(f"\rRoute calculée avec succès (code {response.status_code})", end='')
-                print("\nRéponse :", response.json())
+                #print("\nRéponse :", response.json())
                 res = extract_train_segments(response.json())
                 #print("Résultat extrait :", res)
                 return res
@@ -243,7 +236,7 @@ def compute_route_between(com1, com2, api_key, departure_time=None):
         except requests.exceptions.RequestException as e:
             raise ValueError(f"Erreur de requête: {e}")
     
-    else:
+    else:   
         raise ValueError("Les informations de géométrie sont manquantes pour une ou les deux aires.")
 
 # Fonction utilitaire pour calculer des routes par batch
@@ -283,10 +276,28 @@ def calculate_routes_batch(graph_path, max_requests=1):
         src_coords = Point(src_node["x"], src_node["y"])
         target_coords = Point(target_node["x"], target_node["y"])
 
-        com_src = {'name': src_node["name"], 'geometry': src_coords}
-        com_target = {'name': target_node["name"], 'geometry': target_coords}
+        com_src = {'name': src_node["name"]}
+        com_target = {'name': target_node["name"]}
 
-        departure_time = edge["departure_time"]
+        # Create the addresses for the requests, we no longer use the coordinates.
+        # For France, all the agglomerations (and not municipalities) have unique names, except for Valence.
+        # For Switzerland, everything is unique considering the size of the country.
+        # An address put in a request is of the form "City_name, Country". 
+        if str(src_node["code"]) == "396": # Valence en Tarn-et-Garonne
+            com_src['address'] = "Valence, Occitanie, France"
+        elif str(src_node["code"]) == "049": # Valence en Drôme
+            com_src['address'] = "Valence, Auvergne-Rhône-Alpes, France"
+        else:
+            com_src['address'] = f"{com_src['name']}, {config.country.capitalize()}"
+        if str(target_node["code"]) == "396": # Valence en Tarn-et-Garonne
+            com_target['address'] = "Valence, Occitanie, France"
+        elif str(target_node["code"]) == "049": # Valence en Drôme
+            com_target['address'] = "Valence, Auvergne-Rhône-Alpes, France"
+        else:
+            com_target['address'] = f"{com_target['name']}, {config.country.capitalize()}"
+
+        #departure_time = edge["departure_time"] # problème avec l'antidatage
+        departure_time = "2025-09-22T07:41:00Z" # date arbitraire jour ouvré
         #print(f"For line {edge}, src: {src_id}, target: {target_id}, com_src {com_src}, com_target {com_target}, departure_time {departure_time}")
 
         try:
@@ -348,20 +359,20 @@ def examples():
     # test aires
     paris_info = {
         'nom_aire': 'Chambéry',
-        'geometry': Point(5.909, 45.583)
+        'address': "Chambéry, France"
     }
     lyon_info = {
         'nom_aire': 'Ambérieu-en-Bugey', 
-        'geometry': Point(5.373, 45.961)
+        'address': "Ambérieu-en-Bugey, France"
     }
     
     print("=== Tests de compute_route_between_aires ===")
 
     # Route en transport en commun avec heure de départ
-    print("\n2. Transport en commun (demain 8h):")
+    print("\n2. Transport en commun:")
     #departure_time = str(datetime.now() + timedelta(days=1, hours=8-datetime.now().hour, minutes=-datetime.now().minute)).replace(" ", "T").split(".")[0] + "Z"
-    #departure_time = "2025-08-16T05:41:00Z"
-    result2 = compute_route_between(paris_info, lyon_info, api_key=api_key)#, departure_time=departure_time)
+    departure_time = "2025-09-22T07:41:00Z"
+    result2 = compute_route_between(paris_info, lyon_info, api_key=api_key, departure_time=departure_time)
     if result2:
         print("Result", result2)
 
@@ -369,6 +380,6 @@ if __name__ == "__main__":
     france_graph = 'preprocessing/enriched_graphs/france_railway_network.json'
     swiss_graph = 'preprocessing/enriched_graphs/switzerland_railway_network.json'
 
-    examples()
+    calculate_routes_batch(france_graph, max_requests=5)
 
     print("FIN DU PROGRAMME !")
