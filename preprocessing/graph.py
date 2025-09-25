@@ -131,7 +131,7 @@ def extract_train_type(stop_modes, stop_id):
         #print("DEBUG --- STOP modes :", stop_id, stop_modes.get(stop_id, set()))
         if 2 not in stop_modes[stop_id]:
             # C'est pas un train
-            return 'CAR' # Default filtré
+            return 'NON-TRAIN' # Default filtré
         if 'OCECar' in stop_id:
             return 'CAR'
         elif 'OCETrain TER' in stop_id:
@@ -156,7 +156,7 @@ def extract_train_type(stop_modes, stop_id):
         elif 106 in stop_modes[stop_id]:
             return 'REGIONAL'
         else:
-            return 'CAR' # Default filtré
+            return 'NON-TRAIN'
     else:
         raise ValueError(f"Pays inconnu pour extraction type train: {config.country}")
 
@@ -317,9 +317,10 @@ def build_city_graph_with_trips(cities, stop_modes, stops, stop_times, trips, ca
             print(f"\r[DEBUG] Processing trip {trip_id} stop {s.stop_id}...", end="")
             train_type = extract_train_type(stop_modes, s.stop_id)
 
-            if train_type == 'CAR':
+            if train_type == 'NON-TRAIN':
                 #filtered_cars += 1
-                break # On peut ignorer les voyages car
+                continue # On peut ignorer les voyages 'CAR' normalement mais en France les données sont centrées sur les CARs TER.
+                # Par exemple, Toulouse -> Albi a un TER dont le stop est un stop de CAR et un équivalent TER mais pas utilisé dans les données.
 
             gare = stops_to_gares.get(s.stop_id, {}).get('code_uic', None)
             if gare is None:
@@ -476,7 +477,7 @@ def build_city_graph_with_trips(cities, stop_modes, stops, stop_times, trips, ca
             G_city[u][v]['nb_trips'] = len(trips_data)
             G_city[u][v]['train_types'] = train_type_counts
             
-            # Type dominant pour cette arête
+            # Type dominant pour cette arête TODO. faire par priorité vitesse
             dominant_type = max(train_type_counts, key=train_type_counts.get)
             G_city[u][v]['dominant_train_type'] = dominant_type
 

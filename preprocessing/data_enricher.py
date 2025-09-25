@@ -35,15 +35,15 @@ def euclidean_distance(x1, y1, x2, y2):
     """
     return math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
 
-def compute_fly_distances(graph_path, country='france'):
+def compute_fly_distances(graph, country='france'):
     """
     Calcule les distances à vol d'oiseau entre toutes les paires de villes.
     Écrit le dictionnaire des distances dans le JSON du graphe.
     
     Parameters
     ----------
-    graph_path : str
-        Chemin vers le fichier JSON du graphe
+    graph : dict
+        Le graphe sous forme de dictionnaire
     country : str
         "france" -> EPSG:4326 (lat/lon)
         "suisse" -> EPSG:2056 (mètres)
@@ -52,8 +52,6 @@ def compute_fly_distances(graph_path, country='france'):
     -------
     dict : distances[i-j] = dist en m
     """
-    with open(graph_path, "r", encoding="utf-8") as f:
-        graph = json.load(f)
 
     nodes = graph["nodes"]
     distances = {}
@@ -86,7 +84,7 @@ def demand_function(src_pop, target_pop, distance):
     alpha = 1
     return (src_pop * target_pop) / (distance ** alpha)
 
-def compute_demands(graph_path):
+def compute_demands(graph):
     """
     Calcule les demandes entre villes = (pop_i * pop_j) / distance (loi gravitaire)
     Écrit le dictionnaire des demandes dans le JSON du graphe.
@@ -94,15 +92,13 @@ def compute_demands(graph_path):
     
     Parameters
     ----------
-    graph_path : str
-        Chemin vers le fichier JSON du graphe
-    
+    graph : dict
+        Le graphe sous forme de dictionnaire
+
     Returns
     -------
     dict : demands[i-j] = float où i-j est le texte du couple (i,j).
     """
-    with open(graph_path, "r", encoding="utf-8") as f:
-        graph = json.load(f)
     
     nodes = {n["id"]: n for n in graph["nodes"]}
     distances = graph.get("distances", {})
@@ -239,6 +235,10 @@ def compute_route_between(com1, com2, api_key, departure_time=None):
     else:   
         raise ValueError("Les informations de géométrie sont manquantes pour une ou les deux aires.")
 
+def save_graph(graph, graph_path):
+    with open(graph_path, "w", encoding="utf-8") as f:
+        json.dump(graph, f, ensure_ascii=False, indent=2)
+
 # Fonction utilitaire pour calculer des routes par batch
 def calculate_routes_batch(graph_path, max_requests=1):
     """
@@ -315,8 +315,7 @@ def calculate_routes_batch(graph_path, max_requests=1):
     
     # Save graph
     # Write into same file graph_path as a new attribute into the corresponding edge.
-    with open(graph_path, "w", encoding="utf-8") as f:
-        json.dump(graph, f, ensure_ascii=False, indent=2)
+    save_graph(graph, graph_path)
     
     if failed_edges and False:
         print("\nEdges non calculés :")
@@ -377,9 +376,23 @@ def examples():
         print("Result", result2)
 
 if __name__ == "__main__":
-    france_graph = 'preprocessing/enriched_graphs/france_railway_network.json'
-    swiss_graph = 'preprocessing/enriched_graphs/switzerland_railway_network.json'
+    france_graph_path = 'preprocessing/enriched_graphs/france_railway_network.json'
+    swiss_graph_path = 'preprocessing/enriched_graphs/switzerland_railway_network.json'
 
-    calculate_routes_batch(france_graph, max_requests=5)
+    print("=== Enrichissement des graphes ===")
+    print("> France")
+    france_graph, _, _, _ = read_graph(france_graph_path)
+    compute_fly_distances(france_graph, country='france')
+    compute_demands(france_graph)
+    save_graph(france_graph, france_graph_path)
+    print("Fin de l'enrichissement.")
+
+    print("> Suisse")
+    swiss_graph, _, _, _ = read_graph(swiss_graph_path)
+    compute_fly_distances(swiss_graph, country='switzerland')
+    compute_demands(swiss_graph)
+    save_graph(swiss_graph, swiss_graph_path)
+    print("Fin de l'enrichissement.")
+    #calculate_routes_batch(france_graph, max_requests=5)
 
     print("FIN DU PROGRAMME !")

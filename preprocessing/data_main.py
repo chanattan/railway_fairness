@@ -866,7 +866,7 @@ def generate_graph_france(gtfs_zip, cities_fp):
     # Créer l'association trip_id -> date de départ (année, mois, jour) avec le calendrier.
     calendar = create_calendar(calendar, trips)
 
-    for pop_threshold in range(0, 501, 10): # 10k - 500k, graphes préconstruits
+    for pop_threshold in range(10, 501, 10): # 10k - 500k, graphes préconstruits
         print("[DEBUG] Filtrage des", ("aires" if config.by_agg else "villes"), "comme noeuds du graphe pour pop_threshold:", pop_threshold, "k")
         communes_bis, cities_bis = filter_agglomerations(communes, aires, cities, pop_threshold * 1000, config.by_agg)
         G_city = build_city_graph_with_trips(cities_bis, stop_modes, stops, stop_times, trips, calendar, stops_to_gares, gares_to_cities, communes_bis, aires)
